@@ -1,0 +1,44 @@
+[
+    {
+        "sn": 1,
+        "group": 1,
+        "monster_sn": 1,
+        "monster_count": 10,
+        "interval": 1
+    },
+    {
+        "sn": 2,
+        "group": 1,
+        "monster_sn": 1,
+        "monster_count": 10,
+        "interval": 1
+    },
+    {
+        "sn": 3,
+        "group": 1,
+        "monster_sn": 1,
+        "monster_count": 10,
+        "interval": 1
+    },
+    {
+        "sn": 4,
+        "group": 1,
+        "monster_sn": 1,
+        "monster_count": 10,
+        "interval": 1
+    },
+    {
+        "sn": 5,
+        "group": 1,
+        "monster_sn": 1,
+        "monster_count": 10,
+        "interval": 1
+    },
+    {
+        "sn": 6,
+        "group": 1,
+        "monster_sn": 1,
+        "monster_count": 10,
+        "interval": 1
+    }
+]

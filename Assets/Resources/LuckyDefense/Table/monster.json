@@ -1,0 +1,23 @@
+[
+    {
+        "sn": 1,
+        "hp": 100,
+        "speed": 0.5,
+        "death_reward": 30,
+        "sprite": "LuckyDefense/Sprite/Monster/owl"
+    },
+    {
+        "sn": 2,
+        "hp": 200,
+        "speed": 0.5,
+        "death_reward": 30,
+        "sprite": "LuckyDefense/Sprite/Monster/walrus"
+    },
+    {
+        "sn": 3,
+        "hp": 300,
+        "speed": 0.5,
+        "death_reward": 30,
+        "sprite": "LuckyDefense/Sprite/Monster/zebra"
+    }
+]

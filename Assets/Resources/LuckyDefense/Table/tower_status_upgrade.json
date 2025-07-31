@@ -1,0 +1,107 @@
+[
+    {
+        "sn": 1,
+        "grade": 1,
+        "level": 1,
+        "level_up_cost": 100,
+        "attack_rate": 1.0
+    },
+    {
+        "sn": 2,
+        "grade": 1,
+        "level": 2,
+        "level_up_cost": 100,
+        "attack_rate": 1.2
+    },
+    {
+        "sn": 3,
+        "grade": 1,
+        "level": 3,
+        "level_up_cost": 100,
+        "attack_rate": 1.4
+    },
+    {
+        "sn": 4,
+        "grade": 1,
+        "level": 4,
+        "level_up_cost": 100,
+        "attack_rate": 1.6
+    },
+    {
+        "sn": 5,
+        "grade": 1,
+        "level": 5,
+        "level_up_cost": 100,
+        "attack_rate": 1.8
+    },
+    {
+        "sn": 6,
+        "grade": 2,
+        "level": 1,
+        "level_up_cost": 100,
+        "attack_rate": 1.0
+    },
+    {
+        "sn": 7,
+        "grade": 2,
+        "level": 2,
+        "level_up_cost": 100,
+        "attack_rate": 1.2
+    },
+    {
+        "sn": 8,
+        "grade": 2,
+        "level": 3,
+        "level_up_cost": 100,
+        "attack_rate": 1.4
+    },
+    {
+        "sn": 9,
+        "grade": 2,
+        "level": 4,
+        "level_up_cost": 100,
+        "attack_rate": 1.6
+    },
+    {
+        "sn": 10,
+        "grade": 2,
+        "level": 5,
+        "level_up_cost": 100,
+        "attack_rate": 1.8
+    },
+    {
+        "sn": 11,
+        "grade": 3,
+        "level": 1,
+        "level_up_cost": 100,
+        "attack_rate": 1.0
+    },
+    {
+        "sn": 12,
+        "grade": 3,
+        "level": 2,
+        "level_up_cost": 100,
+        "attack_rate": 1.2
+    },
+    {
+        "sn": 13,
+        "grade": 3,
+        "level": 3,
+        "level_up_cost": 100,
+        "attack_rate": 1.4
+    },
+    {
+        "sn": 14,
+        "grade": 3,
+        "level": 4,
+        "level_up_cost": 100,
+        "attack_rate": 1.6
+    },
+    {
+        "sn": 15,
+        "grade": 3,
+        "level": 5,
+        "level_up_cost": 100,
+        "attack_rate": 1.8
+    }
+]

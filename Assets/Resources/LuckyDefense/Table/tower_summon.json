@@ -1,0 +1,38 @@
+[
+    {
+        "sn": 1,
+        "group": 1,
+        "grade": 1,
+        "weight": 300
+    },
+    {
+        "sn": 2,
+        "group": 1,
+        "grade": 2,
+        "weight": 200
+    },
+    {
+        "sn": 3,
+        "group": 1,
+        "grade": 3,
+        "weight": 100
+    },
+    {
+        "sn": 4,
+        "group": 2,
+        "grade": 1,
+        "weight": 200
+    },
+    {
+        "sn": 5,
+        "group": 2,
+        "grade": 2,
+        "weight": 300
+    },
+    {
+        "sn": 6,
+        "group": 2,
+        "grade": 3,
+        "weight": 100
+    }
+]

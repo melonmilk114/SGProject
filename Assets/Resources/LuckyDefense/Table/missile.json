@@ -1,0 +1,20 @@
+[
+    {
+        "sn": 1,
+        "speed": 5,
+        "destroy_handler": NaN,
+        "move_handler": NaN
+    },
+    {
+        "sn": 2,
+        "speed": 5,
+        "destroy_handler": NaN,
+        "move_handler": NaN
+    },
+    {
+        "sn": 3,
+        "speed": 5,
+        "destroy_handler": NaN,
+        "move_handler": NaN
+    }
+]
