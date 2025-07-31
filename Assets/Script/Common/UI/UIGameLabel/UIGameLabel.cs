@@ -15,7 +15,7 @@ namespace Melon
 #endif
         public void Init_Editor()
         {
-            var fontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Resources/Font/NanumBarunGothic SDF.asset");
+            var fontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Font/NanumBarunGothic SDF.asset");
             if (fontAsset != null)
             {
                 font = fontAsset;
