@@ -66,6 +66,7 @@ namespace Melon
         }
         public virtual void DoPreShow(object inData = null, ActionResult inActionResult = null)
         {
+            DoPreShow(inData);
             inActionResult?.OnSuccess();
         }
         public virtual void DoPostShow(object inData = null)
@@ -74,6 +75,7 @@ namespace Melon
         }
         public virtual void DoPostShow(object inData = null, ActionResult inActionResult = null)
         {
+            DoPostShow(inData);
             inActionResult?.OnSuccess();
         }
         public virtual void DoShowCheck(object inData = null)
@@ -82,6 +84,7 @@ namespace Melon
         }
         public virtual void DoShowCheck(object inData = null, ActionResult inActionResult = null)
         {
+            DoShowCheck(inData);
             inActionResult?.OnSuccess();
         }
         public void DoShow(object inData = null, ActionResult inActionResult = null)
@@ -141,6 +144,7 @@ namespace Melon
         }
         public virtual void DoPreHide(object inData = null, ActionResult inActionResult = null)
         {
+            DoPreHide(inData);
             inActionResult?.OnSuccess();
         }
         public virtual void DoPostHide(object inData = null)
@@ -149,6 +153,7 @@ namespace Melon
         }
         public virtual void DoPostHide(object inData = null, ActionResult inActionResult = null)
         {
+            DoPostHide(inData);
             inActionResult?.OnSuccess();
         }
         public virtual void DoHideCheck(object inData = null)
@@ -157,6 +162,7 @@ namespace Melon
         }
         public virtual void DoHideCheck(object inData = null, ActionResult inActionResult = null)
         {
+            DoHideCheck(inData);
             inActionResult?.OnSuccess();
         }
     
