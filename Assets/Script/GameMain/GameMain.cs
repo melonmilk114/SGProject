@@ -10,6 +10,7 @@ public class GameMain : GameElement
 
     public UIGameLabelButton uiCubeStackButton;
     public UIGameLabelButton uiGridHeroButton;
+    public UIGameLabelButton uiDontTouchTheSpikesButton;
     
     public override void OnAwakeFunc()
     {
@@ -27,6 +28,13 @@ public class GameMain : GameElement
             // 씬 전환
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("GridHero", LoadSceneMode.Single);
+        });
+        
+        uiDontTouchTheSpikesButton.SetClickAction(() =>
+        {
+            // 씬 전환
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene("DontTouchTheSpikes", LoadSceneMode.Single);
         });
     }
     
