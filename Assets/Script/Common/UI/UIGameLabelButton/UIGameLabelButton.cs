@@ -19,6 +19,7 @@ namespace Melon
 #endif
         public override void Init_Editor()
         {
+            base.Init_Editor();
             // 기본 설정
             if (label == null)
             {
