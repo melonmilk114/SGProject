@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DontTouchTheSpikes.unity
     guid: d8d1db7aec7ed42e5ad9f50f8ea65569
+  - enabled: 1
+    path: Assets/Scenes/LuckyDefense.unity
+    guid: e86366cff2c1341d8825b1e25ab0b874
   m_configObjects: {}

@@ -11,6 +11,7 @@ public class GameMain : GameElement
     public UIGameLabelButton uiCubeStackButton;
     public UIGameLabelButton uiGridHeroButton;
     public UIGameLabelButton uiDontTouchTheSpikesButton;
+    public UIGameLabelButton uiLuckyDefenseButton;
     
     public override void OnAwakeFunc()
     {
@@ -36,6 +37,15 @@ public class GameMain : GameElement
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("DontTouchTheSpikes", LoadSceneMode.Single);
         });
+        
+        uiLuckyDefenseButton.SetClickAction(() =>
+        {
+            // 씬 전환
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene("LuckyDefense", LoadSceneMode.Single);
+        });
+        
+        
     }
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
