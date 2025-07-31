@@ -10,7 +10,7 @@ namespace LuckyDefense
         public TowerData towerData = new TowerData();
         public BattleInfoData battleInfoData = new BattleInfoData();
         
-        public DataUpdateFunc<BattleInfoData> updateBattleInfoData = new DataUpdateFunc<BattleInfoData>();
+        public DataSubject<BattleInfoData> updateBattleInfoData = new DataSubject<BattleInfoData>();
         
         public override void InitManager()
         {
@@ -18,7 +18,7 @@ namespace LuckyDefense
             
             battleInfoData.updateBattleInfoData = updateBattleInfoData;
             
-            AddDataUpdateFunc(rootObj);
+            AddObserverObj(rootObj);
             
             TargetObjectReceiver.DoTargetObjectInject(this, rootObj);
         }
@@ -39,23 +39,23 @@ namespace LuckyDefense
             battleInfoData.ResetData();
         }
     
-        public void AddDataUpdateFunc(GameObject inObj)
+        public void AddObserverObj(GameObject inObj)
         {
-            var list = inObj.GetComponentsInChildren<IDataUpdateFunc>(true);
+            var list = inObj.GetComponentsInChildren<IDataObserver>(true);
 
             for (int idx = 0; idx < list.Length; idx++)
             {
-                updateBattleInfoData.AddListener(list[idx]);
+                updateBattleInfoData.AddObserverObj(list[idx]);
             }
         }
 
-        public void RemoveDataUpdateFunc(GameObject inObj)
+        public void RemoveObserverObj(GameObject inObj)
         {
-            var list = inObj.GetComponentsInChildren<IDataUpdateFunc>(true);
+            var list = inObj.GetComponentsInChildren<IDataObserver>(true);
 
             for (int idx = 0; idx < list.Length; idx++)
             {
-                updateBattleInfoData.RemoveListener(list[idx]);
+                updateBattleInfoData.RemoveObserverObj(list[idx]);
             }
         }
     }

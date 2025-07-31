@@ -11,7 +11,7 @@ namespace LuckyDefense
         public long towerSummonLevel = 0;
         public Dictionary<long, long> towerStatusLevel = new Dictionary<long, long>();
         
-        public DataUpdateFunc<BattleInfoData> updateBattleInfoData = null;
+        public DataSubject<BattleInfoData> updateBattleInfoData = null;
         
         public override void InitData()
         {
@@ -28,7 +28,7 @@ namespace LuckyDefense
         public void PlusGold(long inGold)
         {
             gold += inGold;
-            updateBattleInfoData?.UpdateData(this);
+            updateBattleInfoData?.NotifyObservers(this);
         }
         public void MinusGold(long inGold)
         {
@@ -36,7 +36,7 @@ namespace LuckyDefense
             if (gold < 0)
                 gold = 0;
             
-            updateBattleInfoData?.UpdateData(this);
+            updateBattleInfoData?.NotifyObservers(this);
         }
 
         public bool IsGoldEnough(long inGold)

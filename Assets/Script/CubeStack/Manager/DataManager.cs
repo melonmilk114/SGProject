@@ -24,7 +24,7 @@ namespace CubeStack
     
         public void AddDataUpdateFunc(GameObject inObj)
         {
-            var list = inObj.GetComponentsInChildren<IDataUpdateFunc>(true);
+            var list = inObj.GetComponentsInChildren<IDataObserver>(true);
 
             for (int idx = 0; idx < list.Length; idx++)
             {
@@ -34,7 +34,7 @@ namespace CubeStack
 
         public void RemoveDataUpdateFunc(GameObject inObj)
         {
-            var list = inObj.GetComponentsInChildren<IDataUpdateFunc>(true);
+            var list = inObj.GetComponentsInChildren<IDataObserver>(true);
 
             for (int idx = 0; idx < list.Length; idx++)
             {

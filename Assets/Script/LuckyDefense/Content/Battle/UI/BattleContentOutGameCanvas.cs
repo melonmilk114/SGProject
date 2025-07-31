@@ -5,7 +5,7 @@ using Melon;
 namespace LuckyDefense
 {
     public class BattleContentOutGameCanvas : GameElement
-    , IDataUpdateFunc<BattleInfoData>
+    , IDataObserver<BattleInfoData>
     {
         public UIGameButton uiTowerBuildButton;
         public UIGameLabel uiGold;
@@ -24,7 +24,7 @@ namespace LuckyDefense
 
         #region IDataUpdateFunc
 
-        public void IDataUpdateFunc(BattleInfoData inData_1)
+        public void OnDataChanged(BattleInfoData inData_1)
         {
             uiGold.SetText(inData_1.gold.ToString());
         }
