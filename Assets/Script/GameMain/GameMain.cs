@@ -9,6 +9,7 @@ public class GameMain : GameElement
     // MEMO : 게임을 선택 하는 UI를 띄우는 곳
 
     public UIGameLabelButton uiCubeStackButton;
+    public UIGameLabelButton uiGridHeroButton;
     
     public override void OnAwakeFunc()
     {
@@ -19,6 +20,13 @@ public class GameMain : GameElement
             // 씬 전환
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("CubeStack", LoadSceneMode.Single);
+        });
+        
+        uiGridHeroButton.SetClickAction(() =>
+        {
+            // 씬 전환
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene("GridHero", LoadSceneMode.Single);
         });
     }
     
