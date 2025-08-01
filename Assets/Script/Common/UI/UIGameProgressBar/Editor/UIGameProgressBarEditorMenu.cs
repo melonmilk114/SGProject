@@ -6,7 +6,7 @@ namespace Melon
     public class UIGameProgressBarEditorMenu
     {
         // 프리팹 기반 커스텀 UI 추가 (예시)
-        [MenuItem("GameObject/Mango/UIGameProgressBar")]
+        [MenuItem("GameObject/Melon/UIGameProgressBar")]
         static void CreateLabelButton()
         {
             GameObject selectedObject = Selection.activeGameObject;

@@ -6,7 +6,7 @@ namespace Melon.Editor
 {
     public class UIGameLabelEditorMenu
     {
-        [MenuItem("GameObject/Mango/UIGameLabel")]
+        [MenuItem("GameObject/Melon/UIGameLabel")]
         static void CreateLabel()
         {
             GameObject selectedObject = Selection.activeGameObject;

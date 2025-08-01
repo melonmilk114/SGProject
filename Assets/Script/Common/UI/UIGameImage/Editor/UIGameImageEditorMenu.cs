@@ -5,7 +5,7 @@ namespace Melon
 {
     public class UIGameImageEditorMenu
     {
-        [MenuItem("GameObject/Mango/UIGameImage")]
+        [MenuItem("GameObject/Melon/UIGameImage")]
         static void CreateButton()
         {
             GameObject selectedObject = Selection.activeGameObject;

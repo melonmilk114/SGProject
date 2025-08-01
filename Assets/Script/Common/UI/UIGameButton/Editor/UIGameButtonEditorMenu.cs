@@ -6,7 +6,7 @@ namespace Melon
     public class UIGameButtonEditorMenu
     {
         // 프리팹 기반 커스텀 UI 추가 (예시)
-        [MenuItem("GameObject/Mango/UIGameButton")]
+        [MenuItem("GameObject/Melon/UIGameButton")]
         static void CreateButton()
         {
             GameObject selectedObject = Selection.activeGameObject;
