@@ -13,7 +13,7 @@ namespace DontTouchTheSpikes
         {
             // 게임 시작
             
-            contentManager.DoShowContent(ContentManager.ContentType.TITLE);
+            contentManager.DoShowContent(ContentManager.ContentType.GAMEPLAY);
             
         }
 

@@ -24,7 +24,7 @@ namespace DontTouchTheSpikes
             // 플레이어 준비
             _rigidbody.gravityScale = 0;
             _rigidbody.velocity = Vector2.zero;
-            transform.position = Vector3.zero;
+            transform.position = new Vector3(0, -1.69f, 0);
         }
         
         public void GameStart()
@@ -42,7 +42,7 @@ namespace DontTouchTheSpikes
             // 게임오버
             _rigidbody.gravityScale = 0;
             _rigidbody.velocity = Vector2.zero;
-            transform.position = Vector3.zero;
+            //transform.position = Vector3.zero;
         }
         
         

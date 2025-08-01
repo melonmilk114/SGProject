@@ -42,6 +42,8 @@ namespace DontTouchTheSpikes
         public override void DoPostShow(object inData = null)
         {
             GameReady();
+            
+            gamePlayOutGameCanvas.DoShow();
         }
         
         public void GameReady()
@@ -52,7 +54,8 @@ namespace DontTouchTheSpikes
             score = 0;
             player.GameReady();
             
-            gamePlayOutGameCanvas.UpdateGameState();
+            gamePlayOutGameCanvas.GameReady();
+            gamePlayInGameCanvas.GameReady();
             gamePlayInGameCanvas.UpdateScore(score);
         }
         public void GameStart()
@@ -68,7 +71,8 @@ namespace DontTouchTheSpikes
             var showWallDir = CommonFunc.ConvertToPlayerMoveDirToWallDir(player.GetHorizontalDirection());
             spikeManager.AllHideSpike(showWallDir, true);
             
-            gamePlayOutGameCanvas.UpdateGameState();
+            gamePlayOutGameCanvas.GameStart();
+            gamePlayInGameCanvas.GameStart();
             gamePlayInGameCanvas.UpdateScore(score);
         }
 
@@ -84,8 +88,8 @@ namespace DontTouchTheSpikes
 
             player.GameOver();
             
-            gamePlayOutGameCanvas.UpdateGameState();
-            gamePlayInGameCanvas.UpdateScore(score);
+            gamePlayOutGameCanvas.GameOver();
+            gamePlayInGameCanvas.GameOver();
         }
 
         public void StopGamePlayCoroutine()
@@ -121,7 +125,7 @@ namespace DontTouchTheSpikes
 
                 score++;
                 gamePlayInGameCanvas.UpdateScore(score);
-
+                gamePlayInGameCanvas.UpdateBackImageColor();
             }
 
             if (collision.TryGetComponent<SpikeObject>(out var spike))

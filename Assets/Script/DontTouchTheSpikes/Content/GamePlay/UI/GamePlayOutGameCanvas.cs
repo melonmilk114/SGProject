@@ -1,3 +1,4 @@
+using System.Collections;
 using Melon;
 using UnityEngine;
 
@@ -8,11 +9,12 @@ namespace DontTouchTheSpikes.UI
         public IGamePlayContent gamePlayContent;
         
         public GameObject uiGameReadyObj;
-        public UIGameLabelButton uiGameStartButton;
+        public UIGameLabel uiTouchToStartLabel;
+        public UIGameButton uiGameStartButton;
         
         public GameObject uiGameOverObj;
-        public UIGameLabelButton uiGameReadyButton;
-        public UIGameLabelButton uiGameRetryButton;
+        public UIGameLabel uiTouchToReStartLabel;
+        public UIGameButton uiGameRetryButton;
 
         public override void OnAwakeFunc()
         {
@@ -22,16 +24,61 @@ namespace DontTouchTheSpikes.UI
             {
                 gamePlayContent?.GameStart();
             });
-            
-            uiGameReadyButton.SetClickAction(() =>
-            {
-                gamePlayContent?.GameReady();
-            });
-            
+
             uiGameRetryButton.SetClickAction(() =>
             {
                 gamePlayContent?.GameReady();
             });
+        }
+        
+        public override void DoPostShow(object inData = null)
+        {
+            base.DoPostShow(inData);
+
+            StartCoroutine(CoTouchToStartScale());
+            StartCoroutine(CoTouchToReStartScale());
+        }
+        
+        
+        private IEnumerator CoTouchToStartScale()
+        {
+            while (true)
+            {
+                float t = Mathf.PingPong(Time.time * 2f, 1f); // 0~1 반복
+                float eased = Mathf.SmoothStep(1f, 1.1f, t);             // 커브에 따라 조절된 값
+                
+                uiTouchToStartLabel.transform.localScale = Vector3.one * eased;
+
+                yield return null;
+            }
+        }
+        
+        private IEnumerator CoTouchToReStartScale()
+        {
+            while (true)
+            {
+                float t = Mathf.PingPong(Time.time * 2f, 1f); // 0~1 반복
+                float eased = Mathf.SmoothStep(1f, 1.1f, t);             // 커브에 따라 조절된 값
+                
+                uiTouchToReStartLabel.transform.localScale = Vector3.one * eased;
+
+                yield return null;
+            }
+        }
+        
+        public void GameReady()
+        {
+            UpdateGameState();
+        }
+
+        public void GameStart()
+        {
+            UpdateGameState();
+        }
+
+        public void GameOver()
+        {
+            UpdateGameState();
         }
 
         public void UpdateGameState()
