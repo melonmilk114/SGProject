@@ -34,6 +34,7 @@ namespace CubeStack
         
         public override void DoContentStart(object inData)
         {
+            stackContentOutGameCanvas.DoShow();
             GameReady();
         }
 
@@ -48,7 +49,9 @@ namespace CubeStack
         {
             gameState = GAME_STATE.READY;
             
-            stackContentOutGameCanvas?.UpdateGameState();
+            inGameCameraManager.GameReady();
+            stackCubeManager.GameReady();
+            stackContentOutGameCanvas?.GameReady();
         }
 
         public void GameStart()
@@ -59,24 +62,21 @@ namespace CubeStack
             }
 
             gameState = GAME_STATE.PLAYING;
-            
-            stackContentOutGameCanvas?.UpdateGameState();
 
             score = 0;
             spawnCubeCount = 0;;
             inGameCameraManager.GameStart();
             stackCubeManager.GameStart();
-            gameStartCoroutine = StartCoroutine(CoGameStart());
+            stackContentOutGameCanvas?.GameStart();
             
-            var spawnCube = stackCubeManager.SpawnCube(spawnCubeCount);
-            spawnCubeCount++;
+            gameStartCoroutine = StartCoroutine(CoGameStart());
         }
 
         public void GameOver()
         {
             gameState = GAME_STATE.GAMEOVER;
             
-            stackContentOutGameCanvas?.UpdateGameState();
+            stackContentOutGameCanvas?.GameOver();
             
             if (gameStartCoroutine != null)
             {
@@ -92,6 +92,9 @@ namespace CubeStack
 
         private IEnumerator CoGameStart()
         {
+            stackCubeManager.SpawnCube(spawnCubeCount);
+            spawnCubeCount++;
+            
             while (true)
             {
                 // Perfect 테스트용

@@ -10,14 +10,23 @@ namespace CubeStack
         private float offestY = 0;
         
         public Camera inGameCamera;
-        
-        public void GameStart()
+
+        public void CameraPosReset()
         {
             float x = -1.5f;
             float y = 3f;
             float z = -1.5f;
             
             inGameCamera.transform.position = new Vector3(x, y, z);
+        }
+        
+        public void GameReady()
+        {
+            CameraPosReset();
+        }
+        public void GameStart()
+        {
+            CameraPosReset();
         }
 
         public void MoveCamera(float inOffsetY)

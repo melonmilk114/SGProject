@@ -41,12 +41,22 @@ namespace CubeStack
             }
         }
 
-        public void GameStart()
+        public void CubeReset()
         {
             lastCube = startTopCube;
             
             createCubeList.ForEach(inForItem => Destroy(inForItem.gameObject));
             createCubeList.Clear();
+        }
+        
+        public void GameReady()
+        {
+            CubeReset();
+        }
+
+        public void GameStart()
+        {
+            CubeReset();
         }
 
         public StackCube SpawnCube(int inSpawnCount)
