@@ -95,7 +95,7 @@ MonoBehaviour:
   skillData:
     name: "\uC774\uB3D9"
     apCost: 5
-    coolDown: 5
+    coolDown: 1
     skillType: 4
   coolDown: 0
   caster: {fileID: 0}
@@ -316,7 +316,7 @@ MonoBehaviour:
   skillData:
     name: "\uADFC\uC811\uACF5\uACA9"
     apCost: 5
-    coolDown: 5
+    coolDown: 1
     skillType: 1
   coolDown: 0
   caster: {fileID: 0}
@@ -368,7 +368,7 @@ MonoBehaviour:
   skillData:
     name: "\uBD88\uACF5\uACA9(\uB3C4\uD2B8\uB51C)"
     apCost: 3
-    coolDown: 3
+    coolDown: 1
     skillType: 3
   coolDown: 0
   caster: {fileID: 0}
