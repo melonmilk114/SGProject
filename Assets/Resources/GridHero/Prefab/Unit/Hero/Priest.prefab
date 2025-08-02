@@ -45,61 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData:
-    name: 
+    name: "\uADFC\uC811\uACF5\uACA9"
     apCost: 5
     coolDown: 5
     skillType: 1
   coolDown: 0
   caster: {fileID: 0}
---- !u!1 &528035620063354385
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8956733012881443716}
-  - component: {fileID: 8410407135344860587}
-  m_Layer: 0
-  m_Name: CharmStatusEffect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8956733012881443716
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528035620063354385}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9064951380998808630}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8410407135344860587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528035620063354385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2558fa9f47c24c2c81ac083ee9a68ced, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusEffectData:
-    value: 0
-    duration: 0
-  duration: 2147483647
-  tmpFaction: 0
 --- !u!1 &538003048966089787
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,65 +96,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData:
-    name: 
+    name: "\uC774\uB3D9"
     apCost: 3
     coolDown: 5
     skillType: 4
   coolDown: 0
   caster: {fileID: 0}
---- !u!1 &3616409675800666583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9064951380998808630}
-  - component: {fileID: 619202637218213272}
-  m_Layer: 0
-  m_Name: Charm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9064951380998808630
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3616409675800666583}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8956733012881443716}
-  m_Father: {fileID: 3457994429923595718}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &619202637218213272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3616409675800666583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af040e55ddf492eab9b86483d876dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillData:
-    name: 
-    apCost: 2
-    coolDown: 2
-    skillType: 3
-  coolDown: 0
-  caster: {fileID: 0}
-  statusEffect: {fileID: 8410407135344860587}
 --- !u!1 &3980582187233567861
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +133,7 @@ Transform:
   m_Children:
   - {fileID: 7536540545838439747}
   - {fileID: 7321524871635562306}
-  - {fileID: 9064951380998808630}
+  - {fileID: 3050845692294867017}
   m_Father: {fileID: 3482239397486562912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5248139764743345495
@@ -419,6 +317,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3482239397486562912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8223620902925794797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3050845692294867017}
+  - component: {fileID: 5389227524296723520}
+  m_Layer: 0
+  m_Name: Heal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3050845692294867017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223620902925794797}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3457994429923595718}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5389227524296723520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223620902925794797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d140035c8504e82a5c6f794291e463e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillData:
+    name: "\uD790"
+    apCost: 3
+    coolDown: 2
+    skillType: 2
+  coolDown: 0
+  caster: {fileID: 0}
 --- !u!1001 &3275223015904186871
 PrefabInstance:
   m_ObjectHideFlags: 0

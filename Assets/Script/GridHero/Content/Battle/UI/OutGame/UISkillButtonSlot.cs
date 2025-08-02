@@ -38,7 +38,7 @@ namespace GridHero
             if (_unitSkill == null)
                 return;
             
-            uiSkillName.SetText($"{_unitSkill.name}");
+            uiSkillName.SetText($"{_unitSkill.skillData.name}");
             uiSkillApCost.SetText($"ApCost : {_unitSkill.skillData.apCost.ToString()}");
             uiSkillCooldown.SetText($"CoolDown : {_unitSkill.coolDown.ToString()}");
         }

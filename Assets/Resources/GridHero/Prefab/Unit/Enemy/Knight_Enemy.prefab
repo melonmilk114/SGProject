@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData:
-    name: 
+    name: "\uADFC\uC811\uACF5\uACA9"
     apCost: 5
     coolDown: 5
     skillType: 1
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData:
-    name: 
+    name: "\uC774\uB3D9"
     apCost: 5
     coolDown: 5
     skillType: 4
