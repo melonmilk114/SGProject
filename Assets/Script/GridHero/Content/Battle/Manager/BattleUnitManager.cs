@@ -86,7 +86,7 @@ namespace GridHero.Battle
         {
             return _unitList
                 .Where(item => 
-                    item != inUnit && 
+                    //item != inUnit && 
                     item.unitFaction == inFaction &&
                     item.IsAlive() &&
                     battleContent.GetManhattanDist(inUnit.tileOffsetCoord, item.tileOffsetCoord) <= inDist
