@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public class FireAttackSkill : MeleeAttackSkill
     {

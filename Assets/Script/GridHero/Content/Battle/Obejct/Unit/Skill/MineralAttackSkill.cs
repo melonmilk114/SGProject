@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Melon;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public class MineralAttackSkill : UnitSkill 
     {

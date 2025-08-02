@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public abstract class BattleCheckCondition : ScriptableObject
     {

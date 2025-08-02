@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using GridHeroes.Battle;
+using GridHero.Battle;
 using Melon;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class UISkillList : GameElement
     {

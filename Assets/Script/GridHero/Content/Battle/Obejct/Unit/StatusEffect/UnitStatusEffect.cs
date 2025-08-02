@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public class UnitStatusEffect : StatusEffect
     {

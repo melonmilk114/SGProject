@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public class SelectSkillState : BattleState
     {

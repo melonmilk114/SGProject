@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public class MovementSkill : UnitSkill
     {

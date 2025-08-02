@@ -1,7 +1,7 @@
 using System;
 using Melon;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class ContentManager : Melon.ContentManager
     {

@@ -1,4 +1,4 @@
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public class TileStatusEffect : StatusEffect
     {

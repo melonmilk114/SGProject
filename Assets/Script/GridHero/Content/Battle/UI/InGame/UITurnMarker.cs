@@ -1,9 +1,9 @@
 using System;
-using GridHeroes.Battle;
+using GridHero.Battle;
 using Melon;
 using UnityEngine;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class UITurnMarker : GameElement
     {

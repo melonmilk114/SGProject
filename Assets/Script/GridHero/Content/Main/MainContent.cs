@@ -2,7 +2,7 @@ using System;
 using Melon;
 using UnityEngine;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class MainContent : Content
     {

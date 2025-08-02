@@ -1,6 +1,6 @@
-using GridHeroes.Battle;
+using GridHero.Battle;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public interface ITileSelect
     {

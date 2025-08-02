@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public interface IBattleStateManager
     {

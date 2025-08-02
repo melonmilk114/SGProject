@@ -1,4 +1,4 @@
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
 #if UNITY_EDITOR
     [System.Serializable]

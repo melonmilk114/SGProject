@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class DataManager : Melon.DataManager
     {

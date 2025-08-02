@@ -1,4 +1,4 @@
-namespace GridHeroes
+namespace GridHero
 {
     public enum UNIT_ANIM_TYPE
     {

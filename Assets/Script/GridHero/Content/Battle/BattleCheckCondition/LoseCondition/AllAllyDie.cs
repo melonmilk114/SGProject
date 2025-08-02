@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     [CreateAssetMenu(menuName = "Lose Condition/All Ally Die", fileName = "All Ally Die", order = 0)]
     public class AllAllyDie : BattleCheckCondition

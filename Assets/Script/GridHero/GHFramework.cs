@@ -1,9 +1,9 @@
-using GridHeroes.Battle;
+using GridHero.Battle;
 using Melon;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class GHFramework : GameFramework
     {

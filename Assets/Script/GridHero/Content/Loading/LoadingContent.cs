@@ -3,7 +3,7 @@ using System.Collections;
 using Melon;
 using UnityEngine;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class LoadingContent : Content
     {

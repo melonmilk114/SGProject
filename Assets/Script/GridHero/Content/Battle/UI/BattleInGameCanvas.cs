@@ -1,8 +1,8 @@
-using GridHeroes.Battle;
+using GridHero.Battle;
 using Melon;
 using UnityEngine;
 
-namespace GridHeroes.UI
+namespace GridHero.UI
 {
     public class BattleInGameCanvas : GameElement
     {

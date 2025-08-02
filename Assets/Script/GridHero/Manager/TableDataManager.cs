@@ -1,7 +1,7 @@
 using Melon;
 using UnityEngine;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class TableDataManager : Melon.TableDataManager
     {

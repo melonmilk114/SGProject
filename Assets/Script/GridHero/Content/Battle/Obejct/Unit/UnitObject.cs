@@ -6,7 +6,7 @@ using Melon;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace GridHeroes.Battle
+namespace GridHero.Battle
 {
     public class UnitObject : GameElement
     {

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using GridHeroes.Battle;
-using GridHeroes.UI;
+using GridHero.Battle;
+using GridHero.UI;
 using UnityEngine;
 
-namespace GridHeroes
+namespace GridHero
 {
     public class BattleContent : Melon.Content
     , IBattleContent
