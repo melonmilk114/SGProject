@@ -309,6 +309,7 @@ namespace GridHero
         public void ShowBattleResult(bool isInWin)
         {
             battleOutGameCanvas.ShowBattleResult(isInWin);
+            HideActionPanel();
         }
         public void HideBattleResult()
         {
