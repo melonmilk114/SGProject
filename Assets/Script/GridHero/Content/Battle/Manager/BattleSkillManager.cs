@@ -39,7 +39,7 @@ namespace GridHero.Battle
             var skills = GetSkills(inUnitObject);
             int currAp = inUnitObject.GetStatValue(STAT_TYPE.CURR_AP);
             
-            return skills.FindAll(inFindItem => inFindItem.skillData.apCost <= currAp);
+            return skills.FindAll(inFindItem => inFindItem.skillData.apCost <= currAp && inFindItem.coolDown <= 0);
         }
         
         public List<UnitSkill> GetCanUseSkills(UnitObject inUnitObject, SKILL_TYPE inSkillType)
