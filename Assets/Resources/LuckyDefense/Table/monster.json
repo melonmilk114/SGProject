@@ -1,23 +1,23 @@
 [
     {
         "sn": 1,
-        "hp": 100,
-        "speed": 0.5,
+        "hp": 300,
+        "speed": 1.5,
         "death_reward": 30,
-        "sprite": "LuckyDefense/Sprite/Monster/owl"
+        "animator": "LuckyDefense/Anim/Monster/bull_walk"
     },
     {
         "sn": 2,
         "hp": 200,
-        "speed": 0.5,
+        "speed": 1.7,
         "death_reward": 30,
-        "sprite": "LuckyDefense/Sprite/Monster/walrus"
+        "animator": "LuckyDefense/Anim/Monster/turkey_walk"
     },
     {
         "sn": 3,
         "hp": 300,
-        "speed": 0.5,
+        "speed": 2,
         "death_reward": 30,
-        "sprite": "LuckyDefense/Sprite/Monster/zebra"
+        "animator": "LuckyDefense/Anim/Monster/calf_walk"
     }
 ]

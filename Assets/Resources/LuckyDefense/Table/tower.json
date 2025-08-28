@@ -5,9 +5,10 @@
         "upgrade_cost": 100,
         "remove_reward": 50,
         "misslie_sn": 1,
-        "missile_interval": 0.1,
+        "missile_interval": 0.5,
         "attack_range": 3,
-        "summon_weight": 100
+        "summon_weight": 100,
+        "animator": "LuckyDefense/Anim/Tower/lamb_atk"
     },
     {
         "sn": 2,
@@ -15,9 +16,10 @@
         "upgrade_cost": 100,
         "remove_reward": 50,
         "misslie_sn": 2,
-        "missile_interval": 0.1,
+        "missile_interval": 0.5,
         "attack_range": 3,
-        "summon_weight": 100
+        "summon_weight": 100,
+        "animator": "LuckyDefense/Anim/Tower/piglet_atk"
     },
     {
         "sn": 3,
@@ -25,8 +27,9 @@
         "upgrade_cost": 100,
         "remove_reward": 50,
         "misslie_sn": 3,
-        "missile_interval": 0.1,
+        "missile_interval": 0.5,
         "attack_range": 3,
-        "summon_weight": 100
+        "summon_weight": 100,
+        "animator": "LuckyDefense/Anim/Tower/sheep_atk"
     }
 ]

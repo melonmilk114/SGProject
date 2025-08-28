@@ -2,19 +2,25 @@
     {
         "sn": 1,
         "speed": 5,
-        "destroy_handler": NaN,
-        "move_handler": NaN
+        "damage": 5,
+        "sprite": "LuckyDefense/Sprite/Missile/missile_1",
+        "destroy_handler": "LuckyDefense.MissileDestroyHandler",
+        "move_handler": "LuckyDefense.MissileMoveHandler"
     },
     {
         "sn": 2,
         "speed": 5,
-        "destroy_handler": NaN,
-        "move_handler": NaN
+        "damage": 5,
+        "sprite": "LuckyDefense/Sprite/Missile/missile_2",
+        "destroy_handler": "LuckyDefense.MissileDestroyHandler",
+        "move_handler": "LuckyDefense.MissileMoveHandler"
     },
     {
         "sn": 3,
         "speed": 5,
-        "destroy_handler": NaN,
-        "move_handler": NaN
+        "damage": 5,
+        "sprite": "LuckyDefense/Sprite/Missile/missile_3",
+        "destroy_handler": "LuckyDefense.MissileDestroyHandler",
+        "move_handler": "LuckyDefense.MissileMoveHandler"
     }
 ]
