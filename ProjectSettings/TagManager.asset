@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - TowerSpot
   - 
   - 
   - 
@@ -38,6 +38,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 1082163681
+    locked: 0
+  - name: TowerSpot
+    uniqueID: 1123549831
+    locked: 0
+  - name: TowerAtkRange
+    uniqueID: 2089764511
+    locked: 0
+  - name: Missile
+    uniqueID: 3965369271
+    locked: 0
+  - name: Monster
+    uniqueID: 1494421685
+    locked: 0
+  - name: Tower
+    uniqueID: 3396843655
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
