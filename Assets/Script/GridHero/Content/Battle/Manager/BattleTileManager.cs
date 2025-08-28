@@ -114,8 +114,7 @@ namespace GridHero.Battle
 
         public void OnTileSelect(TileObject inTile)
         {
-            DebugLogHelper.Log($"selected at offset {inTile.offsetCoord} and cube {inTile.cubeCoord}", this,
-                "OnTileSelect");
+            DebugLogHelper.Log($"selected at offset {inTile.offsetCoord} and cube {inTile.cubeCoord}");
             
             onTileSelect?.Invoke(inTile);
         }
