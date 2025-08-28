@@ -5,23 +5,8 @@ using UnityEngine;
 
 namespace Melon
 {
-    public class ObjectPoolManager : MonoBehaviour , IFrameworkModule
+    public class ObjectPoolManager : SingletonObject<ObjectPoolManager> , IFrameworkModule
     {
-        #region Singleton
-        private static ObjectPoolManager _instance = null;
-        public static ObjectPoolManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<ObjectPoolManager>();
-                }
-                return _instance;
-            }
-        }
-        #endregion
-        
         public GameObject poolRootObj;
         public Dictionary<string, Queue<GameElement>> objectPools = new Dictionary<string, Queue<GameElement>>();
         private Dictionary<string, HashSet<GameElement>> objectSeen = new Dictionary<string, HashSet<GameElement>>();
@@ -35,7 +20,7 @@ namespace Melon
         
         public Dictionary<string, GameElement> templatePools = new Dictionary<string, GameElement>();
         
-        public void InitModule()
+        public void InitModule(IActionResult inActionResult)
         {
             prefabList.ForEach(RegisterToPoolByPrefab);
             
@@ -53,6 +38,8 @@ namespace Melon
             }
 
             Debug.Log($"[ObjectPoolManager] 풀 구성 요소 {configurators.Count()}개에서 프리팹 등록 완료");
+            
+            inActionResult.OnSuccess();
         }
         
         public void RegisterToPool(IObjectPoolUnit inPoolUnit)
@@ -128,8 +115,11 @@ namespace Melon
                 {
                     inObj.transform.SetParent(poolRootObj.transform, true);
                     inObj.transform.localScale = Vector3.one;
+                    inObj.transform.position = Vector3.zero;
                     objectPools[unitName].Enqueue(inObj);
                     objectSeen[unitName].Add(inObj);
+                    
+                    castObj.OnPoolEnqueue();
                 }
             }   
         }
@@ -180,11 +170,11 @@ namespace Melon
                     }
                     
                     returnObj = getObject.Invoke();
-                    returnObj.transform.SetParent(inParentObj.transform, false);
-                    return returnObj;
                 }
 
-                returnObj.transform.SetParent(inParentObj.transform, false);
+                returnObj.transform.SetParent(inParentObj.transform, false);   
+                if (returnObj is IObjectPoolUnit castObj)
+                    castObj.OnPoolDequeue();
                 return returnObj;
             }
             Debug.LogError("RegisterToPool Error");

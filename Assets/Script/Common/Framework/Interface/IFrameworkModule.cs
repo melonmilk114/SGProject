@@ -2,6 +2,6 @@ namespace Melon
 {
     public interface IFrameworkModule
     {
-        public void InitModule();
+        public void InitModule(IActionResult inActionResult);
     }
 }

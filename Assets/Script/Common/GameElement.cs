@@ -6,7 +6,7 @@ using UnityEngineInternal;
 
 namespace Melon
 {
-    public class GameElement : MonoBehaviour
+    public class GameElement : MonoBehaviour, IGameElement
     {
         public bool isInit = false;
         

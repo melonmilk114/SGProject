@@ -29,6 +29,12 @@ namespace Melon
         
         public override void PlayUIAnimation(Action inEndAction = null)
         {
+            if (gameObject.activeInHierarchy == false)
+            {
+                inEndAction?.Invoke();
+                return;
+            }
+            
             if (aniCoroutine != null)
             {
                 StopCoroutine(aniCoroutine);

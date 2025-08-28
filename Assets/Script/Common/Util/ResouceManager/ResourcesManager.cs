@@ -3,26 +3,21 @@ using UnityEngine;
 
 namespace Melon
 {
-    public class ResourcesManager : MonoBehaviour, IFrameworkModule
+    public class ResourcesManager : SingletonObject<ResourcesManager>, IFrameworkModule
     {
-        #region Singleton
-        private static ResourcesManager _instance = null;
-        public static ResourcesManager Instance
+        public void InitModule(IActionResult inActionResult)
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<ResourcesManager>();
-                }
-                return _instance;
-            }
+            inActionResult.OnSuccess();
         }
-        #endregion
-        
-        public void InitModule()
+
+        public GameElement LoadGameElement(string inPath)
         {
-            
+            GameElement gameElement = Resources.Load<GameElement>(inPath);
+            if (gameElement == null)
+            {
+                DebugLogHelper.LogError($"Load GameElement Failed: {inPath}");
+            }
+            return gameElement;
         }
 
         public Sprite GetSprite(string inPath)
@@ -30,9 +25,19 @@ namespace Melon
             Sprite sprite = Resources.Load<Sprite>(inPath);
             if (sprite == null)
             {
-                Debug.LogError($"Load Sprite Failed: {inPath}");
+                DebugLogHelper.LogError($"Load Sprite Failed: {inPath}");
             }
             return sprite;
+        }
+        
+        public RuntimeAnimatorController GetAnimatorController(string inPath)
+        {
+            RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(inPath);
+            if (controller == null)
+            {
+                DebugLogHelper.LogError($"Load AnimatorController Failed: {inPath}");
+            }
+            return controller;
         }
     }
 }

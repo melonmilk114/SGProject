@@ -10,11 +10,21 @@ namespace Melon
         public override void OnAwakeFunc()
         {
             base.OnAwakeFunc();
+            
+            showAnimation = CommonUtils.FindComponent<UIAnimationScaleUp>(gameObject);
+            hideAnimation = CommonUtils.FindComponent<UIAnimationScaleDown>(gameObject);
         }
 
         public void DoShowUI(object inData = null)
         {
             DoShow(inData);
+        }
+        
+        public override void DoPostShow(object inData = null)
+        {
+            base.DoPostShow(inData);
+            
+            showAnimation?.PlayUIAnimation();
         }
         
         public override void DoPostShow(object inData = null, ActionResult inActionResult = null)
@@ -26,9 +36,6 @@ namespace Melon
 
         public void DoHideUI(object inData = null)
         {
-            if (gameObject.activeInHierarchy == false)
-                return;
-            
             if (hideAnimation != null)
             {
                 hideAnimation.PlayUIAnimation(() =>
