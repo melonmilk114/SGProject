@@ -9,10 +9,8 @@ namespace LuckyDefense
     ,ITargetObjectReceiver<TableDataManager> 
     {
         [SerializeField] private List<MissileObject> _missiles = new List<MissileObject>();
-        [SerializeField] private List<MissileObject> _clearMissiles = new List<MissileObject>();
         public GameObject missilesParent;
-        
-        public MissileTableData missileTableData;
+        public GameObject damageParent;
         
         #region ITargetObjectReceiver<TableDataManager>
         TableDataManager ITargetObjectReceiver<TableDataManager>.GetTargetObject { get; set; }
@@ -31,38 +29,24 @@ namespace LuckyDefense
         }
         #endregion
 
+        public List<MissileObject> FindDestroyReadyMissiles()
+        {
+            return _missiles.FindAll(inItem => inItem.isDestroyReady);
+        }
+
         public void InitContent()
         {
-            missileTableData = GetTableDataManager()?.missileTableData;
+            
         }
         
         
         public void UpdateContent(float inDeltaTime)
         {
             _missiles.ForEach(inItem => inItem.UpdateObject(inDeltaTime));
-            
-            // 미사일 삭제
-            if (_clearMissiles.Count > 0)
-            {
-                _clearMissiles.ForEach(inItem =>
-                {
-                    _missiles.Remove(inItem);
-                });
-                
-                _clearMissiles.Clear();
-            }
         }
         
-        public void CreateMissile(TowerGroupObject inTowerGroup, MonsterObject inMonsterObject)
+        public void CreateMissile(TowerObject inTower, MonsterObject inMonsterObject, MissileTableDataItem inMissileTableDataItem, long inMissileDamage)
         {
-            // 발사해야하는 미사일 데이터 가져오기
-            var tmpMissileData = missileTableData.FindMissileData(inTowerGroup.TowerTableData.missile_sn);
-            if (tmpMissileData == null)
-            {
-                Debug.LogError($"{this} 미사일 데이터({inTowerGroup.TowerTableData.missile_sn})가 null 입니다.");
-                return;
-            }
-            
             // 미사일 생성
             MissileObject missile = ObjectPoolManager.Instance.DequeuePool<MissileObject>(missilesParent);
             if (missile == null)
@@ -71,12 +55,14 @@ namespace LuckyDefense
                 return;
             }
             
-            missile.Init(tmpMissileData, inMonsterObject);
+            missile.Init(inMissileTableDataItem, inMonsterObject);
+            missile.SetDamage(inMissileDamage);
             inMonsterObject.PreDamage(missile);
         
             missile.onHitMonster = OnMissileHitMonster;
             
-            missile.transform.position = inTowerGroup.transform.position;
+            missile.transform.position.Normalize();
+            missile.transform.position = inTower.transform.position;
             _missiles.Add(missile);
         }
         
@@ -86,13 +72,30 @@ namespace LuckyDefense
             inMonster.MissileHit(inMissile);
         }
         
+        public void CreateDamage(long inMissileDamage, Vector3 inPos)
+        {
+            // 미사일 생성
+            DamageObject damage = ObjectPoolManager.Instance.DequeuePool<DamageObject>(damageParent);
+            if (damage == null)
+            {
+                Debug.LogError($"{this} 데미지 오브젝트가 null 입니다.");
+                return;
+            }
+            
+            damage.transform.position.Normalize();
+            damage.transform.position = inPos;
+            damage.SetDamage(inMissileDamage);
+            
+        }
+        
         public void MissileDestroy(MissileObject inMissile)
         {
             inMissile.MissileDestroy(new ActionResult()
             {
                 onSuccess = () =>
                 {
-                    _clearMissiles.Add(inMissile);
+                    CreateDamage(inMissile.GetDamage(), inMissile.transform.position);
+                    _missiles.Remove(inMissile);
                     ObjectPoolManager.Instance.EnqueuePool(inMissile);
                 }
             });

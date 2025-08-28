@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using LuckyDefense.Interface;
 using Melon;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,12 +16,7 @@ namespace LuckyDefense
         
         public GameObject monstersParent;
 
-        public IBattleService battleService;
-        
         public MonsterTableData monsterTableData;
-
-        public Action<MissileObject> onMissileDestroy = null;
-        public Func<UIMonsterHpBar> onHpBarCreate = null;
         
         #region ITargetObjectReceiver<TableDataManager>
         TableDataManager ITargetObjectReceiver<TableDataManager>.GetTargetObject { get; set; }
@@ -41,12 +35,6 @@ namespace LuckyDefense
         }
         #endregion
         
-        public void AwakeContent()
-        {
-            _wayPoints.Clear();
-            monsterWayPoints.ForEach(inItem => _wayPoints.Add(inItem.position));
-        }
-        
         public void UpdateContent(float inDeltaTime)
         {
             _monsters.ForEach(inItem => inItem.UpdateObject(inDeltaTime));
@@ -58,6 +46,9 @@ namespace LuckyDefense
             {
                 monsterTableData = inMgr.monsterTableData;
             });
+            
+            _wayPoints.Clear();
+            monsterWayPoints.ForEach(inItem => _wayPoints.Add(inItem.position));
         }
         
         public MonsterObject FindAliveMonsterObject()
@@ -73,7 +64,13 @@ namespace LuckyDefense
             });
         }
         
-        public void CreateMonster(long inSn)
+        public List<MonsterObject> FindDeadMonster()
+        {
+            return _monsters.FindAll(inFindItem => inFindItem.isDead);
+        }
+        
+        
+        public void CreateMonster(long inSn, UIMonsterHpBar inHpBar)
         {
             var tmpMonsterData = monsterTableData.FindData(inSn);
             if (tmpMonsterData == null)
@@ -89,25 +86,16 @@ namespace LuckyDefense
                 return;
             }
             
-            monster.Init(tmpMonsterData, _wayPoints, onHpBarCreate?.Invoke());
-            
-            monster.onDeath = OnMonsterDeath;
-            monster.onMissileDestroy = OnMissileDestroy;
-            
+            monster.Init(tmpMonsterData, _wayPoints, inHpBar);
+
             monster.transform.position = _wayPoints[0];
             _monsters.Add(monster);
         }
         
-        private void OnMonsterDeath(MonsterObject inMonster)
+        public void MonsterDeath(MonsterObject inMonster)
         {
-            battleService.MonsterDeathReward(inMonster.tableData.sn);
             _monsters.Remove(inMonster);
             ObjectPoolManager.Instance.EnqueuePool(inMonster);
-        }
-        
-        private void OnMissileDestroy(MissileObject inMissile)
-        {
-            onMissileDestroy?.Invoke(inMissile);
         }
     }
 }

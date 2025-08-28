@@ -15,7 +15,10 @@ namespace LuckyDefense
             {
                 GetContentManager(inMgr =>
                 {
-                    inMgr.DoShowContent(ContentManager.ContentType.LOADING);
+                    inMgr.DoShowContent(ContentManager.ContentType.BATTLE, new BattleContent.ContentData()
+                    {
+                        stageSn = 1,
+                    });
                 });
             });
         }

@@ -10,10 +10,6 @@ namespace LuckyDefense
         public TowerSpotData towerSpotData = new TowerSpotData();
         public StageTableData stageTableData = new StageTableData();
         public WaveTableData waveTableData = new WaveTableData();
-        public TowerSummonTableData towerSummonTableData = new TowerSummonTableData();
-        public TowerSummonUpgradeData towerSummonUpgradeData = new TowerSummonUpgradeData();
-        public TowerStatusUpgradeTableData towerStatusUpgradeTableData = new TowerStatusUpgradeTableData();
-        public TowerLevelUpgradeTableData towerLevelUpgradeTableData = new TowerLevelUpgradeTableData();
 
         public override void InitManager()
         {
@@ -32,10 +28,6 @@ namespace LuckyDefense
             towerSpotData.InitData();
             stageTableData.InitData();
             waveTableData.InitData();
-            towerSummonTableData.InitData();
-            towerSummonUpgradeData.InitData();
-            towerStatusUpgradeTableData.InitData();
-            towerLevelUpgradeTableData.InitData();
         }
 
         public override void ResetData()
@@ -48,10 +40,6 @@ namespace LuckyDefense
             towerSpotData.ResetData();
             stageTableData.ResetData();
             waveTableData.ResetData();
-            towerSummonTableData.ResetData();
-            towerSummonUpgradeData.ResetData();
-            towerStatusUpgradeTableData.ResetData();
-            towerLevelUpgradeTableData.ResetData();
         }
     }
 }

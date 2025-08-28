@@ -55,7 +55,7 @@ namespace LuckyDefense
         public long sn = 0;
         public long hp = 2;
         public float speed = 3;
-        public string sprite = "";
+        public string animator = "";
         public long death_reward = 0;
 
         public string deathHandlerType = "LuckyDefense.MonsterDeathHandler";

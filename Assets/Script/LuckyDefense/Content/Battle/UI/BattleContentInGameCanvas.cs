@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using LuckyDefense.Interface;
 using Melon;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,8 +9,12 @@ namespace LuckyDefense
     {
         public GameElement monsterHpBarParent;
         public UITowerSelectMenu uiTowerSelectMenu;
-
-        public ITowerSelectMenu towerSelectMenuInterface = null;
+        
+        public void InitCanvas(ITowerSelectMenu inTowerSelectMenu)
+        {
+            uiTowerSelectMenu.towerSelectMenu = inTowerSelectMenu;
+            uiTowerSelectMenu.DoHideUI();
+        }
         
         public UIMonsterHpBar CreateMonsterHpBar()
         {
@@ -26,12 +29,11 @@ namespace LuckyDefense
         public void ShowTowerSelectMenu(TowerGroupObject inTowerGroup)
         {
             // MEMO : 타워 선택 메뉴
-            // MEMO : 타워 업그레이드, 타워 판매(제거)
+            // MEMO : 타워 판매(제거)
             uiTowerSelectMenu.transform.position = inTowerGroup.transform.position;
             uiTowerSelectMenu.DoShowUI(new UITowerSelectMenu.ShowData()
             {
                 selectTowerGroup = inTowerGroup,
-                towerSelectMenuInterface = towerSelectMenuInterface
             });
         }
 

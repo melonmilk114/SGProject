@@ -10,26 +10,50 @@ namespace LuckyDefense
         public TowerView view;
         public TowerTableDataItem tableData = null;
         
-        public Action<long> onMissileLaunch = null;
         public float nextMissileLaunchTime = float.MaxValue;
         
         public void SetData(TowerTableDataItem inData)
         {
             tableData = inData;
             nextMissileLaunchTime = Time.time + tableData.missile_interval;
+            
+            view.Init(tableData);
         }
         
-        public void OnAttachTower(Action<long> inOnMissileLaunch)
+        public bool IsMissileLaunchReady()
         {
-            onMissileLaunch = inOnMissileLaunch;
+            return Time.time > nextMissileLaunchTime;
         }
-        
-        public void DoMissileLaunch(float inDeltaTime)
+
+        public void DoMissileLaunch(MonsterObject inMonster)
         {
-            if (Time.time > nextMissileLaunchTime)
+            nextMissileLaunchTime = Time.time + tableData.missile_interval;
+            
+            Vector2 dir = (inMonster.transform.position - transform.position).normalized;
+
+            // 좌우/상하 중 큰 쪽으로 방향 고정
+            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
             {
-                nextMissileLaunchTime = Time.time + tableData.missile_interval;
-                onMissileLaunch?.Invoke(tableData.missile_sn);
+                view.PlayAnimation(dir.x > 0 ? Vector2.right : Vector2.left);
+            }
+            else
+            {
+                view.PlayAnimation(dir.y > 0 ? Vector2.up : Vector2.down);
+            }
+        }
+        
+        public void DoTowerSpotMove(Vector3 inTowerSpotPos)
+        {
+            Vector2 dir = (inTowerSpotPos - transform.position).normalized;
+
+            // 좌우/상하 중 큰 쪽으로 방향 고정
+            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            {
+                view.PlayAnimation(dir.x > 0 ? Vector2.right : Vector2.left);
+            }
+            else
+            {
+                view.PlayAnimation(dir.y > 0 ? Vector2.up : Vector2.down);
             }
         }
     }

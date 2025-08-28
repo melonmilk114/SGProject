@@ -10,7 +10,7 @@ namespace LuckyDefense
         public TowerData towerData = new TowerData();
         public BattleInfoData battleInfoData = new BattleInfoData();
         
-        public DataSubject<BattleInfoData> updateBattleInfoData = new DataSubject<BattleInfoData>();
+        public Observable<BattleInfoData> updateBattleInfoData = new Observable<BattleInfoData>();
         
         public override void InitManager()
         {
@@ -41,21 +41,21 @@ namespace LuckyDefense
     
         public void AddObserverObj(GameObject inObj)
         {
-            var list = inObj.GetComponentsInChildren<IDataObserver>(true);
+            var list = inObj.GetComponentsInChildren<IObserver>(true);
 
             for (int idx = 0; idx < list.Length; idx++)
             {
-                updateBattleInfoData.AddObserverObj(list[idx]);
+                updateBattleInfoData.AddObserver(list[idx]);
             }
         }
 
         public void RemoveObserverObj(GameObject inObj)
         {
-            var list = inObj.GetComponentsInChildren<IDataObserver>(true);
+            var list = inObj.GetComponentsInChildren<IObserver>(true);
 
             for (int idx = 0; idx < list.Length; idx++)
             {
-                updateBattleInfoData.RemoveObserverObj(list[idx]);
+                updateBattleInfoData.RemoveObserver(list[idx]);
             }
         }
     }

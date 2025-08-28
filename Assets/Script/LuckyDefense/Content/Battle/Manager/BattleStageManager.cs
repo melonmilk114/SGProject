@@ -21,8 +21,6 @@ namespace LuckyDefense
         public StageTableDataItem currentStageTableData = null;
         private Queue<StageWaveData> _currentWaveQueue = new Queue<StageWaveData>();
         
-        public Action<long> onCreateMonster = null;
-        
         #region ITargetObjectReceiver<TableDataManager>
         TableDataManager ITargetObjectReceiver<TableDataManager>.GetTargetObject { get; set; }
         public void SetTargetObject(TableDataManager inObject)
@@ -78,11 +76,12 @@ namespace LuckyDefense
             InitStageData(inStageSn);
         }
 
-        public void UpdateContent(float inDeltaTime, float inBattleStartElapsedTime)
+
+        public long FindInstanceMonsterID(float inBattleStartElapsedTime)
         {
             // 웨이브 스택이 비어있지 않다면
             if (_currentWaveQueue.Count == 0)
-                return;
+                return 0;
 
             //굳이 코루틴을 돌리지 않았음
             StageWaveData tmpWaveData = null;
@@ -93,9 +92,11 @@ namespace LuckyDefense
                     // 웨이브 시작
                     _currentWaveQueue.Dequeue();
                     // 적 생성
-                    onCreateMonster?.Invoke(tmpWaveData.monsterSn);
+                    return tmpWaveData.monsterSn;
                 }
             }
+            
+            return 0;
         }
     }
 }

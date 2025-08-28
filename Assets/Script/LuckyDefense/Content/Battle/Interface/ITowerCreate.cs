@@ -1,4 +1,4 @@
-﻿namespace LuckyDefense.Interface
+﻿namespace LuckyDefense
 {
     public interface ITowerCreate
     {

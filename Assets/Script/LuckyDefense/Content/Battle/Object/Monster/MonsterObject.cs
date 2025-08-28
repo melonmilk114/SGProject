@@ -18,23 +18,21 @@ namespace LuckyDefense
         
         public List<MissileObject> targetMonsterMissiles = new List<MissileObject>();
 
-        public Action<MissileObject> onMissileDestroy = null;
-        public Action<MonsterObject> onDeath = null;
+        public bool isDead => state?.isDead == true;
         
         public void OnPoolDequeue()
         {
             CommonUtils.AllRemoveComponent<MonsterHandler>(gameObject);
             state.Reset();
             
-            targetMonsterMissiles.ForEach(inForItem =>
-            {
-                onMissileDestroy?.Invoke(inForItem);
-            });
+            targetMonsterMissiles.ForEach(inItem => inItem.isDestroyReady = true);
+            targetMonsterMissiles.Clear();
         }
 
         public void OnPoolEnqueue()
         {
-            
+            targetMonsterMissiles.ForEach(inItem => inItem.isDestroyReady = true);
+            targetMonsterMissiles.Clear();
         }
 
         public void Init(MonsterTableDataItem inData, List<Vector3> inWayPoints, UIMonsterHpBar inHpBar)
@@ -66,7 +64,9 @@ namespace LuckyDefense
 
         public void UpdateObject(float inDeltaTime)
         {
-            _moveHandler?.Move(inDeltaTime);
+            var moveDir = _moveHandler.Move(inDeltaTime);
+            // 이동 애니메이션
+            view?.PlayAnimation(moveDir);
         }
 
         
@@ -82,28 +82,21 @@ namespace LuckyDefense
         {
             state?.MissileHit(inObj.GetDamage());
             view?.SetHp(state.hpRatio);
-            
+
+            inObj.isDestroyReady = true;
             targetMonsterMissiles.Remove(inObj);
             
-            // 미사일 파괴
-            onMissileDestroy?.Invoke(inObj);
- 
             if (state?.isDead == true)
             {
                 _deathHandler.Death(new ActionResult()
                 {
                     onSuccess = () =>
                     {
-                        onDeath?.Invoke(this);
                         // UI 사망
                         view?.Death();
                     }
                 });
             }
         }
-
-        
-
-        
     }
 }

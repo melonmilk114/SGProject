@@ -1,16 +1,15 @@
 using System;
-using LuckyDefense.Interface;
 using Melon;
 
 namespace LuckyDefense
 {
     public class BattleContentOutGameCanvas : GameElement
-    , IDataObserver<BattleInfoData>
+    , IObserver<BattleInfoData>
     {
         public UIGameButton uiTowerBuildButton;
         public UIGameLabel uiGold;
 
-        public ITowerCreate towerCreateInterface = null;
+        public ITowerCreate towerCreate = null;
         
         public override void OnAwakeFunc()
         {
@@ -18,13 +17,18 @@ namespace LuckyDefense
             
             uiTowerBuildButton?.SetClickAction(() =>
             {
-                towerCreateInterface?.CreateRandomTower();
+                towerCreate?.CreateRandomTower();
             });
+        }
+        
+        public void InitCanvas(ITowerCreate inTowerCreate)
+        {
+            towerCreate = inTowerCreate;
         }
 
         #region IDataUpdateFunc
 
-        public void OnDataChanged(BattleInfoData inData_1)
+        public void OnNotify(BattleInfoData inData_1)
         {
             uiGold.SetText(inData_1.gold.ToString());
         }

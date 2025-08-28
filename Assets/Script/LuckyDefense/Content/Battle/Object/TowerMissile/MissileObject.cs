@@ -18,6 +18,8 @@ public class MissileObject : GameElement, IObjectPoolUnit
     
     public MonsterObject monsterTarget;
 
+    public bool isDestroyReady = false;
+
     private long missileDamage = 0;
 
     public Action<MissileObject, MonsterObject> onHitMonster = null;
@@ -36,7 +38,6 @@ public class MissileObject : GameElement, IObjectPoolUnit
     public void OnPoolDequeue()
     {
         missileDamage = 0;
-        CommonUtils.AllRemoveComponent<MissileObject>(gameObject);
     }
 
     public void OnPoolEnqueue()
@@ -64,10 +65,16 @@ public class MissileObject : GameElement, IObjectPoolUnit
         }
         
         monsterTarget = inMonster;
+        isDestroyReady = false;
+        
+        view.Init(tableData);
     }
     
     public void UpdateObject(float inDeltaTime)
     {
+        if (isDestroyReady)
+            return;
+        
         _moveHandler?.Move(inDeltaTime);
 
         ResolveMonsterHit();

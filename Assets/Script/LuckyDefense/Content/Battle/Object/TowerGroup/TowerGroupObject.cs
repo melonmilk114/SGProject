@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Melon;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace LuckyDefense
         public TowerGroupView view;
         
         public List<TowerObject> towerList = new List<TowerObject>();
+        private List<TowerObject> _missileLaunchReadyTowerList = new List<TowerObject>();
         public TowerTableDataItem TowerTableData
         {
             get
@@ -21,10 +23,6 @@ namespace LuckyDefense
                 return towerList[0].tableData;
             }
         }
-
-        public long missileDamage = 0;
-        
-        public Action<TowerGroupObject> onMissileLaunch = null;
         
         public Coroutine moveCoroutine = null;
         public bool isMoving = false;
@@ -60,13 +58,14 @@ namespace LuckyDefense
 
         public void CreateAttachTower(TowerTableDataItem inData)
         {
-            GameElement prefab = Resources.Load<GameElement>(inData?.prefabPath);
+            var gameElement = ResourcesManager.Instance.LoadGameElement("LuckyDefense/Prefab/Tower/TowerObject");
 
             // 프리팹이 제대로 로드되었는지 확인합니다.
-            if (prefab != null)
+            if (gameElement != null)
             {
                 // 프리팹을 현재 위치에 생성합니다.
-                var newPrefab = Instantiate(prefab.gameObject, transform);
+                var newPrefab = Instantiate(gameElement.gameObject, transform);
+                newPrefab.transform.SetAsFirstSibling();
                 var comp = newPrefab.GetComponent<TowerObject>();
                 comp.SetData(inData);
                 AttachTower(comp);
@@ -75,14 +74,13 @@ namespace LuckyDefense
             {
                 Debug.LogError($"{this} 타워 프리팹을 찾을 수 없습니다.");
             }
+            
+            view?.InitView(inData);
+            view?.ShowAttackRange(false);
         }
 
         public void AttachTower(TowerObject inTower)
         {
-            inTower.OnAttachTower((inMissileSn) =>
-            {
-                onMissileLaunch?.Invoke(this);
-            });
             inTower.transform.SetParent(transform);
             
             towerList.Add(inTower);
@@ -95,21 +93,21 @@ namespace LuckyDefense
             else if (towerList.Count == 2)
             {
                 towerList[0].transform.localPosition = new Vector3(-0.25f, 0.25f);
-                towerList[0].transform.localScale = new Vector3(0.5f, 0.5f);
+                towerList[0].transform.localScale = new Vector3(0.75f, 0.75f);
                 
                 towerList[1].transform.localPosition = new Vector3(0.25f, -0.25f);
-                towerList[1].transform.localScale = new Vector3(0.5f, 0.5f);
+                towerList[1].transform.localScale = new Vector3(0.75f, 0.75f);
             }
             else if (towerList.Count == 3)
             {
-                towerList[0].transform.localPosition = new Vector3(-0.25f, 0.25f);
-                towerList[0].transform.localScale = new Vector3(0.5f, 0.5f);
+                towerList[0].transform.localPosition = new Vector3(0, 0.25f);
+                towerList[0].transform.localScale = new Vector3(0.75f, 0.75f);
                 
                 towerList[1].transform.localPosition = new Vector3(0.25f, -0.25f);
-                towerList[1].transform.localScale = new Vector3(0.5f, 0.5f);
+                towerList[1].transform.localScale = new Vector3(0.75f, 0.75f);
                 
                 towerList[2].transform.localPosition = new Vector3(-0.25f, -0.25f);
-                towerList[2].transform.localScale = new Vector3(0.5f, 0.5f);
+                towerList[2].transform.localScale = new Vector3(0.75f, 0.75f);
             }
             else
             {
@@ -136,9 +134,6 @@ namespace LuckyDefense
     
             try
             {
-                // 콜백 해제
-                inTower.OnAttachTower(null);
-        
                 // 부모 관계 해제
                 inTower.transform.SetParent(null);
         
@@ -150,19 +145,20 @@ namespace LuckyDefense
             }
         }
         
-        public void AttachMove()
+        public void AttachMove(Action<TowerGroupObject> inEndAction)
         {
             if (moveCoroutine != null)
             {
                 StopCoroutine(moveCoroutine);
                 moveCoroutine = null;
             }
-            moveCoroutine = StartCoroutine(CoAttachMove());
+            moveCoroutine = StartCoroutine(CoAttachMove(inEndAction));
         }
 
-        private IEnumerator CoAttachMove()
+        private IEnumerator CoAttachMove(Action<TowerGroupObject> inEndAction)
         {
             isMoving = true;
+            towerList.ForEach(inItem => inItem.DoTowerSpotMove(Vector3.zero));
             while (Vector3.Distance(transform.localPosition, Vector3.zero) > 0.01f) // 목표 지점에 충분히 가까워질 때까지 반복
             {
                 // 현재 위치에서 목표 위치로 이동하는 방향 벡터 계산
@@ -173,16 +169,37 @@ namespace LuckyDefense
 
                 yield return null; // 다음 프레임까지 대기
             }
+            
+            
 
             // 최종적으로 목표 위치에 정확히 맞춰줍니다. (오차 방지)
             transform.localPosition = Vector3.zero;
             isMoving = false;
             yield return null;
+            inEndAction?.Invoke(this);
+        }
+
+        public void UpdateMissileLaunchReadyTowerList()
+        {
+            _missileLaunchReadyTowerList.Clear();
+            
+            if (isMoving)
+                return;
+            
+            _missileLaunchReadyTowerList = towerList
+                .Where(inItem => inItem.IsMissileLaunchReady())
+                .ToList();
         }
         
-        public void DoMissileLaunch(float inDeltaTime)
+        public List<TowerObject> GetMissileLaunchReadyTowerList()
         {
-            towerList.ForEach(inItem => inItem.DoMissileLaunch(inDeltaTime));
+            return _missileLaunchReadyTowerList;
+        }
+
+        public List<TowerObject> DoMissileLaunch(MonsterObject inMonster)
+        {
+            _missileLaunchReadyTowerList.ForEach(inItem => inItem.DoMissileLaunch(inMonster));
+            return _missileLaunchReadyTowerList;
         }
     }
 }

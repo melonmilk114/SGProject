@@ -47,12 +47,12 @@ namespace LuckyDefense
         }
 
 
-        public TowerTableDataItem FindTowerData(long inSn)
+        public TowerTableDataItem FindTowerData(long? inSn)
         {
             return dataList.Find(inFindData => inFindData.sn == inSn);
         }
         
-        public List<TowerTableDataItem> FindTowerDataList(long inGrade)
+        public List<TowerTableDataItem> FindTowerDataListByGrade(long inGrade)
         {
             return dataList.FindAll(inFindItem => inFindItem.grade == inGrade);
         }
@@ -64,10 +64,7 @@ namespace LuckyDefense
         
         public long GetRandomPick(long inGrade)
         {
-            var findDataList = FindTowerDataList(inGrade);
-            findDataList = findDataList
-                .OrderBy(inItem => inItem.sn)
-                .ToList();
+            var findDataList = FindTowerDataListByGrade(inGrade);
             
             int totalWeight = 0;
             findDataList.ForEach(inForItem =>
@@ -83,16 +80,16 @@ namespace LuckyDefense
                 currWeight += findDataList[idx].summon_weight;
         
                 if (randomWeight < currWeight) 
-                    return findDataList[idx].grade;
+                    return findDataList[idx].sn;
             }
 
             return 0;
         }
 
-        public bool IsTowerUpgradeAvailable(TowerTableDataItem inData)
+        public bool IsTowerMergeAvailable(TowerTableDataItem inData)
         {
-            // 다음 티어가 있는가?
-            var findList = FindTowerDataList(inData.grade + 1);
+            // 다음 등급이 있는가?
+            var findList = FindTowerDataListByGrade(inData.grade + 1);
             return findList.Count > 0;
         }
     }
@@ -102,15 +99,12 @@ namespace LuckyDefense
     public class TowerTableDataItem
     {
         public long sn = 0;
-        public long grade = 0;
-        public long upgrade_cost = 0;
+        public int grade = 0;
         public long remove_reward = 0;
         public long missile_sn = 0;
         public float missile_interval = 0.01f;
         public float attack_range = 3.0f;
         public int summon_weight = 0;
-
-        // MEMO : 제거 예정
-        public string prefabPath = "LuckyDefense/Prefab/Tower/TowerObjectView_Pig";
+        public string animator = "";
     }
 }

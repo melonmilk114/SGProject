@@ -8,27 +8,28 @@ namespace LuckyDefense
     public class BattleInfoData : Melon.Data
     {
         public long gold = 0;
-        public long towerSummonLevel = 0;
+        public long towerSummonCostGold = 100;
+        public int towerSummonDefaultLevel = 1;
         public Dictionary<long, long> towerStatusLevel = new Dictionary<long, long>();
         
-        public DataSubject<BattleInfoData> updateBattleInfoData = null;
+        public Observable<BattleInfoData> updateBattleInfoData = null;
         
         public override void InitData()
         {
             gold = 10000;
-            towerSummonLevel = 1;
+            towerSummonDefaultLevel = 1;
         }
 
         public override void ResetData()
         {
             gold = 0;
-            towerSummonLevel = 1;
+            towerSummonDefaultLevel = 1;
         }
 
         public void PlusGold(long inGold)
         {
             gold += inGold;
-            updateBattleInfoData?.NotifyObservers(this);
+            updateBattleInfoData?.NotifyAll(this);
         }
         public void MinusGold(long inGold)
         {
@@ -36,7 +37,7 @@ namespace LuckyDefense
             if (gold < 0)
                 gold = 0;
             
-            updateBattleInfoData?.NotifyObservers(this);
+            updateBattleInfoData?.NotifyAll(this);
         }
 
         public bool IsGoldEnough(long inGold)

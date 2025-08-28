@@ -1,4 +1,4 @@
-using LuckyDefense.Interface;
+using System;
 using Melon;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,49 +10,47 @@ namespace LuckyDefense
         public class ShowData
         {
             public TowerGroupObject selectTowerGroup;
-            public ITowerSelectMenu towerSelectMenuInterface;
         }
-
+        
+        public UIGameLabelButton uiTowerSellButton;
         public UIGameLabelButton uiTowerTierUpButton;
-        public UIGameLabelButton uiTowerRemoveButton;
 
         public TowerGroupObject selectTowerGroup = null;
-        public ITowerSelectMenu towerSelectMenuInterface = null;
+
+        public ITowerSelectMenu towerSelectMenu = null;
         
         public override void OnAwakeFunc()
         {
             base.OnAwakeFunc();
-            
+
+            uiTowerSellButton.SetClickAction(() =>
+            {
+                towerSelectMenu?.SellTowerGroup(selectTowerGroup);
+            });
             uiTowerTierUpButton.SetClickAction(() =>
             {
-                towerSelectMenuInterface?.TowerUpgrade(selectTowerGroup);
+                towerSelectMenu?.MergeTowerGroup(selectTowerGroup);
             });
-            
-            uiTowerRemoveButton.SetClickAction(() =>
-            {
-                towerSelectMenuInterface?.TowerRemove(selectTowerGroup);
-            });
-
-            showAnimation = CommonUtils.FindComponent<UIAnimationScaleUp>(gameObject);
-            hideAnimation = CommonUtils.FindComponent<UIAnimationScaleDown>(gameObject);
         }
         
-        public override void DoPreShow(object inData = null, ActionResult inActionResult = null)
+        public override void DoPreShow(object inData = null)
         {
+            base.DoPreShow(inData);
+            
             if (inData is ShowData showData)
             {
                 selectTowerGroup = showData.selectTowerGroup;
-                towerSelectMenuInterface = showData.towerSelectMenuInterface;
             }
-            
-            base.DoPreShow(inData, inActionResult);
         }
-
-        public override void DoPostShow(object inData = null, ActionResult inActionResult = null)
+        
+        public override void DoPostShow(object inData = null)
         {
-            base.DoPostShow(inData, inActionResult);
+            base.DoPostShow(inData);
 
-            uiTowerTierUpButton.interactable = towerSelectMenuInterface.IsTowerUpgradeAvailable(selectTowerGroup);
+            if(towerSelectMenu.IsTowerMergeAvailable(selectTowerGroup))
+                uiTowerTierUpButton.DoShow();
+            else
+                uiTowerTierUpButton.DoHide();
         }
     }
 }
