@@ -56,7 +56,6 @@ public class GameMain : GameElement
             if (gameFramework != null)
             {
                 gameFramework.InitFramework();
-                gameFramework.GameStart();
                 break;
             }
         }
