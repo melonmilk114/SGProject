@@ -10,7 +10,7 @@
     {
         "sn": 2,
         "speed": 5,
-        "damage": 5,
+        "damage": 10,
         "sprite": "LuckyDefense/Sprite/Missile/missile_2",
         "destroy_handler": "LuckyDefense.MissileDestroyHandler",
         "move_handler": "LuckyDefense.MissileMoveHandler"
@@ -18,7 +18,7 @@
     {
         "sn": 3,
         "speed": 5,
-        "damage": 5,
+        "damage": 15,
         "sprite": "LuckyDefense/Sprite/Missile/missile_3",
         "destroy_handler": "LuckyDefense.MissileDestroyHandler",
         "move_handler": "LuckyDefense.MissileMoveHandler"
