@@ -14,17 +14,26 @@ namespace LuckyDefense
             public long stageSn;
         }
 
+        // 타워를 관리하는 매니저
         public BattleTowerManager battleTowerManager;
+        // 미사일을 관리하는 매니저
         public BattleMissileManager battleMissileManager;
+        // 몬스터를 관리하는 매니저
         public BattleMonsterManager battleMonsterManager;
+        // 웨이브를 관리하는 매니저
         public BattleStageManager battleStageManager;
 
+        // 전투 관련 데이터를 관리하는 서비스
         public BattleService battleService;
         
+        // 인게임 UI
         public BattleContentInGameCanvas inGameView;
+        // 아웃게임 UI
         public BattleContentOutGameCanvas outGameView;
         
+        // 타워 그룹 선택시 라인 렌더러
         public LineRenderer selectTowerGroupLineRenderer;
+        // 선택 된 타워 그룹, 타워 스팟
         private TowerGroupObject _selectTowerGroup = null;
         private TowerSpotObject _selectTowerSpot = null;
 
@@ -32,6 +41,7 @@ namespace LuckyDefense
         public float battleStartElapsedTime = 0f;
         public bool isBattlePlaying = false;
 
+        // 컨텐츠 초기화
         public override void InitContent()
         {
             base.InitContent();
@@ -74,6 +84,7 @@ namespace LuckyDefense
             
         }
 
+        // 컨텐츠가 화면에 보여지기 전에 호출하여 데이터 초기화
         public override void DoShowCheck(object inData, ActionResult inActionResult)
         {
             if (inData is ContentData contentData)
@@ -93,6 +104,9 @@ namespace LuckyDefense
             isBattlePlaying = true;
         }
 
+        /// <summary>
+        /// 미사일 발사
+        /// </summary>
         private void MissileLunch()
         {
             // 미사일 발사 준비가 된 타워 리스트를 갱신
@@ -122,6 +136,9 @@ namespace LuckyDefense
             });
         }
 
+        /// <summary>
+        /// 웨이브 진행
+        /// </summary>
         private void ProgressWave()
         {
             // 지금 생성할 몬스터가 있는가?
@@ -132,6 +149,9 @@ namespace LuckyDefense
             battleMonsterManager?.CreateMonster(instanceMonsterID, inGameView.CreateMonsterHpBar());
         }
 
+        /// <summary>
+        /// 제거되어야할 미사일들 제거
+        /// </summary>
         private void DestroyMissiles()
         {
             // 제거 되어야 할 미사일들 삭제하기
@@ -144,6 +164,9 @@ namespace LuckyDefense
             
         }
 
+        /// <summary>
+        /// 제거 되어야할 몬스터들 제거
+        /// </summary>
         private void DestroyMonster()
         {
             var deadMonsters = battleMonsterManager.FindDeadMonster();
@@ -157,12 +180,16 @@ namespace LuckyDefense
             });
         }
 
+        /// <summary>
+        /// 타워 생성
+        /// </summary>
+        /// <param name="inTowerSn">생성할 타워 SN</param>
         private void CreateTower(long inTowerSn)
         {
             battleTowerManager?.CreateTower(inTowerSn);
         }
  
-
+        // 타워 선택 관련 
         #region TowerSelect
         
         public Vector3 currTouchPosition
@@ -175,35 +202,64 @@ namespace LuckyDefense
             }
         }
 
+        /// <summary>
+        /// 타워 그룹 선택
+        /// </summary>
+        /// <param name="inTowerGroup"></param>
         public void SelectTower(TowerGroupObject inTowerGroup)
         {
+            // 선택한 타워 그룹 및 스팟 저장
             _selectTowerGroup = inTowerGroup;
             _selectTowerSpot = battleTowerManager.FindAttachTowerSpot(_selectTowerGroup);
             
+            // 타워 선택 메뉴 표시
             inGameView?.ShowTowerSelectMenu(_selectTowerGroup);
+            // 타워 공격 범위 표시
             _selectTowerGroup?.view.ShowAttackRange(true);
         }
         
+        /// <summary>
+        /// 선택한 타워 이동
+        /// </summary>
+        /// <param name="inTowerSpot"> 이동할 타워 스팟 </param>
+        /// <param name="inStartPos"></param>
+        /// <param name="inEndPos"></param>
         public void SelectTowerMove(TowerSpotObject inTowerSpot, Vector3 inStartPos, Vector3 inEndPos)
         {
+            // 라인 렌더러 표시
             ShowTowerGroupLineRenderer(inStartPos, inEndPos);
+            // 이동할 타워 스팟 표시
             battleTowerManager?.ChangeTowerSpotRedBack(inTowerSpot);
             
+            // 타워 선택 메뉴 숨김
             inGameView?.HideTowerSelectMenu();
+            // 타워 공격 범위 숨김
             _selectTowerGroup?.view.ShowAttackRange(false);
         }
 
+        /// <summary>
+        /// 타워 선택 해제
+        /// </summary>
         public void DeselectTower()
         {
+            // 라인 렌더러 숨김
             HideTowerGroupLineRenderer();
             
+            // 타워 선택 메뉴 숨김
             inGameView?.HideTowerSelectMenu();
+            // 타워 공격 범위 숨김
             _selectTowerGroup?.view.ShowAttackRange(false);
-                
+            
+            // 선택한 타워 그룹 및 스팟 초기화
             _selectTowerGroup = null;
             _selectTowerSpot = null;
         }
 
+        /// <summary>
+        /// 라인 랜더러 표시
+        /// </summary>
+        /// <param name="inStartPos"></param>
+        /// <param name="inEndPos"></param>
         public void ShowTowerGroupLineRenderer(Vector3 inStartPos, Vector3 inEndPos)
         {
             selectTowerGroupLineRenderer.enabled = true;
@@ -213,6 +269,9 @@ namespace LuckyDefense
             battleTowerManager?.ChangeAllTowerSpotWhiteBack();
         }
         
+        /// <summary>
+        /// 라인 랜더러 숨김
+        /// </summary>
         public void HideTowerGroupLineRenderer()
         {
             selectTowerGroupLineRenderer.enabled = false;
@@ -232,10 +291,12 @@ namespace LuckyDefense
                 DeselectTower();
             }
             
+            // 터치한 위치에 타워 그룹이 있는지 확인
             var touchTowerGroup = battleTowerManager.FindTowerGroupByTouch(currTouchPosition);
 
             if (touchTowerGroup != null)
             {
+                // 타워 그룹 선택
                 SelectTower(touchTowerGroup);
             }
             else
@@ -251,6 +312,7 @@ namespace LuckyDefense
 
             if (_selectTowerGroup != null)
             {
+                // 터치한 위치에 타워 스팟이 있는지 확인
                 var touchTowerSpot = battleTowerManager?.FindTowerSpotByTouch(currTouchPosition);
 
                 if (touchTowerSpot == null)
@@ -267,6 +329,7 @@ namespace LuckyDefense
                 }
                 else
                 {
+                    // 타워 그룹 이동
                     SelectTowerMove(touchTowerSpot, _selectTowerGroup.transform.position, touchTowerSpot.transform.position);
                 }
             }
@@ -308,14 +371,26 @@ namespace LuckyDefense
 
         #endregion
 
+        // 타워 선택 메뉴 관련
         #region ITowerSelectMenu
         
+        /// <summary>
+        /// 타워 판매
+        /// </summary>
+        /// <param name="inTowerGroup"></param>
         public void SellTowerGroup(TowerGroupObject inTowerGroup)
         {
+            // 타워 판매시 재화 획득
             battleService.RefundTowerCost(inTowerGroup.TowerTableData.sn);
+            // 타워 제거
             battleTowerManager?.TowerRemove(inTowerGroup);
         }
         
+        /// <summary>
+        /// 타워 합성이 가능한지 체크
+        /// </summary>
+        /// <param name="inTowerGroup"></param>
+        /// <returns></returns>
         public bool IsTowerMergeAvailable(TowerGroupObject inTowerGroup)
         {
             if (inTowerGroup.GetAttachTowerCount() < GameConfigData.maxTowerMergeCount)
@@ -333,6 +408,11 @@ namespace LuckyDefense
 
             return true;
         }
+        
+        /// <summary>
+        /// 타워 합성 
+        /// </summary>
+        /// <param name="inTowerGroup"></param>
         public void MergeTowerGroup(TowerGroupObject inTowerGroup)
         {
             if (IsTowerMergeAvailable(inTowerGroup) == false)
@@ -359,6 +439,7 @@ namespace LuckyDefense
         
         #endregion
 
+        // 타워 생성 관련
         #region ITowerCreate
 
         public bool IsCreateRandomTower()
@@ -372,6 +453,9 @@ namespace LuckyDefense
             
             return true;
         }
+        /// <summary>
+        /// 랜덤 타워 생성
+        /// </summary>
         public void CreateRandomTower()
         {
             if (IsCreateRandomTower() == false)
