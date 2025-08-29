@@ -14,14 +14,14 @@ namespace LuckyDefense
         public void SetDamage(long inDamage)
         {
             label.text = inDamage.ToString();
-            StartCoroutine(FlyAndFade(3));
+            StartCoroutine(FlyAndFade(1f));
         }
 
         public IEnumerator FlyAndFade(float duration = 1.0f)
         {
             // 시작 위치와 목표 위치 (100,100 대각선)
             Vector3 startPos = transform.position;
-            Vector3 endPos = startPos + new Vector3(1f, 1f, 0f);
+            Vector3 endPos = startPos + new Vector3(0f, 1f, 0f);
 
             // 초기 색상 저장
             Color startColor = label.color;
