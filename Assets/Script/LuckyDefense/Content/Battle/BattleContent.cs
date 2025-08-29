@@ -7,7 +7,8 @@ using UnityEngine.Serialization;
 
 namespace LuckyDefense
 {
-    public partial class BattleContent : Melon.Content, ITowerSelectMenu, ITowerCreate
+    public partial class BattleContent : Content, ITowerSelectMenu, ITowerCreate, IBattleOutGameMenu
+        , IObserver<BattleInfoData>
     {
         public class ContentData
         {
@@ -54,7 +55,7 @@ namespace LuckyDefense
             battleService.InitService();
             
             inGameView?.InitCanvas(this);
-            outGameView?.InitCanvas(this);
+            outGameView?.InitCanvas(this, this);
             
             // 라인 렌더러 비활성화
             selectTowerGroupLineRenderer.enabled = false;
@@ -91,7 +92,7 @@ namespace LuckyDefense
             {
                 stageSn = contentData.stageSn;
 
-                battleStageManager.InitContentManager(stageSn);
+                
             }
 
             inActionResult.OnSuccess();
@@ -102,6 +103,14 @@ namespace LuckyDefense
             // MEMO : 게임 시작
             base.DoPostShow(inData, inActionResult);
             isBattlePlaying = true;
+            battleStartElapsedTime = 0;
+
+            battleService.GameStart();
+            battleMonsterManager.GameStart();
+            battleMissileManager.GameStart();
+            battleTowerManager.GameStart();
+            battleStageManager.GameStart(stageSn);
+            outGameView.HideGameConditionPopup();
         }
 
         /// <summary>
@@ -147,6 +156,7 @@ namespace LuckyDefense
                 return;
             
             battleMonsterManager?.CreateMonster(instanceMonsterID, inGameView.CreateMonsterHpBar());
+            battleService.SetNowMonsterCount(battleMonsterManager.GetMonsterCount());
         }
 
         /// <summary>
@@ -178,6 +188,8 @@ namespace LuckyDefense
                 battleService.MonsterDeathReward(inItem.tableData.sn);
                 battleMonsterManager?.MonsterDeath(inItem);
             });
+
+            battleService.SetNowMonsterCount(battleMonsterManager.GetMonsterCount());
         }
 
         /// <summary>
@@ -500,6 +512,39 @@ namespace LuckyDefense
         }
 
         #endregion
+        
+        #region IBattleOutGameMenu
+        public void OnClickGameExit()
+        {
+            GetContentManager(inMgr =>
+            {
+                inMgr.DoShowContent(ContentManager.ContentType.TITLE);
+            });
+        }
+        #endregion
+
+        #region OnNotify
+
+        public void OnNotify(BattleInfoData inData_1)
+        {
+            // 승패 처리
+            if (inData_1.nowMonsterCount >= inData_1.maxMonsterCount)
+            {
+                // 패배
+                outGameView.ShowGameConditionPopup("LOSE");
+                isBattlePlaying = false;
+            }
+
+            if (inData_1.nowMonsterCount <= 0 && battleStageManager.IsNextWaveAvailable() == false)
+            {
+                outGameView.ShowGameConditionPopup("WIN");
+                isBattlePlaying = false;
+            }
+        }
+
+        #endregion
+
+
         
     }
 }

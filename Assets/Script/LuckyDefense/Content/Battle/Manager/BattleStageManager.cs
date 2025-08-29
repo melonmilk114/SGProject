@@ -71,7 +71,7 @@ namespace LuckyDefense
             }
         }
 
-        public void InitContentManager(long inStageSn)
+        public void GameStart(long inStageSn)
         {
             InitStageData(inStageSn);
         }
@@ -97,6 +97,11 @@ namespace LuckyDefense
             }
             
             return 0;
+        }
+
+        public bool IsNextWaveAvailable()
+        {
+            return _currentWaveQueue.Count > 0;
         }
     }
 }

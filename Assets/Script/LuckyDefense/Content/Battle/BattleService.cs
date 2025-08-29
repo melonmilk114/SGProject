@@ -63,6 +63,11 @@ namespace LuckyDefense
             });
         }
 
+        public void GameStart()
+        {
+            battleInfoData.ResetData();
+        }
+
         public long GetTowerRandomSummon(int inGrade)
         {
             var pickTowerSn = towerTableData.GetRandomPick(inGrade);
@@ -128,6 +133,11 @@ namespace LuckyDefense
             {
                 DebugLogHelper.LogError($"findData null sn : {inSn}");
             }
+        }
+        
+        public void SetNowMonsterCount(long inCount)
+        {
+            battleInfoData.SetNowMonsterCount(inCount);
         }
 
         // MEMO : 미사일 데미지 계산

@@ -91,6 +91,18 @@ namespace LuckyDefense
             });
         }
 
+        public void GameStart()
+        {
+            _towerGroups.ForEach(inItem =>
+            {
+                var findSpot = FindAttachTowerSpot(inItem);
+                findSpot.DetachTowerGroup();
+            
+                inItem.ClearTower();
+            });
+            _towerGroups.Clear();
+        }
+
         // 미사일 발사 준비가 된 타워 리스트를 갱신
         public void UpdateMissileLaunchReadyTowerList()
         {

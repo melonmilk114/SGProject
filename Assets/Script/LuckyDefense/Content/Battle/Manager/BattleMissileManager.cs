@@ -39,6 +39,12 @@ namespace LuckyDefense
             
         }
         
+        public void GameStart()
+        {
+            _missiles.ForEach(inItem => ObjectPoolManager.Instance.EnqueuePool(inItem));
+            _missiles.Clear();
+        }
+        
         
         public void UpdateContent(float inDeltaTime)
         {

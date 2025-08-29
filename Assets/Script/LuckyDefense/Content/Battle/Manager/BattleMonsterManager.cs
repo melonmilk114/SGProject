@@ -51,6 +51,16 @@ namespace LuckyDefense
             monsterWayPoints.ForEach(inItem => _wayPoints.Add(inItem.position));
         }
         
+        public void GameStart()
+        {
+            _monsters.ForEach(inItem =>
+            {
+                ObjectPoolManager.Instance.EnqueuePool(inItem.view.uiHpBar);
+                ObjectPoolManager.Instance.EnqueuePool(inItem);
+            });
+            _monsters.Clear();
+        }
+        
         public MonsterObject FindAliveMonsterObject()
         {
             return _monsters.Find(inFindItem => inFindItem.state.isPreDead == false);
@@ -67,6 +77,11 @@ namespace LuckyDefense
         public List<MonsterObject> FindDeadMonster()
         {
             return _monsters.FindAll(inFindItem => inFindItem.isDead);
+        }
+
+        public long GetMonsterCount()
+        {
+            return _monsters.Count;
         }
         
         
