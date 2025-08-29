@@ -24,16 +24,10 @@ namespace LuckyDefense
         {
             uiAttackRange.gameObject.SetActive(false);
         }
-
-
-        public void ShowRedBack()
+        
+        public void ChangeBackColor(Color inColor)
         {
-            background.color = new Color(1, 0, 0, 0.4f);
-        }
-
-        public void ShowWhiteBack()
-        {
-            background.color = new Color(1, 1, 1, 0f);
+            background.color = inColor;
         }
     }
 }

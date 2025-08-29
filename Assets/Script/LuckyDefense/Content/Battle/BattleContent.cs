@@ -226,10 +226,23 @@ namespace LuckyDefense
         /// <param name="inEndPos"></param>
         public void SelectTowerMove(TowerSpotObject inTowerSpot, Vector3 inStartPos, Vector3 inEndPos)
         {
-            // 라인 렌더러 표시
-            ShowTowerGroupLineRenderer(inStartPos, inEndPos);
-            // 이동할 타워 스팟 표시
-            battleTowerManager?.ChangeTowerSpotRedBack(inTowerSpot);
+            // 이동할 타워 스팟에 타워가 있는지 판단
+            if (inTowerSpot.IsEmptySpot() == false)
+            {
+                var color = new Color(1,0,0,0.4f);
+                // 라인 렌더러 표시
+                ShowTowerGroupLineRenderer(inStartPos, inEndPos, color);
+                battleTowerManager?.ChangeTowerSpotBackColor(inTowerSpot, color);
+            }
+            else
+            {
+                var color = new Color(1,1,0,0.4f);
+                // 라인 렌더러 표시
+                ShowTowerGroupLineRenderer(inStartPos, inEndPos, color);
+                // 이동할 타워 스팟 표시
+                battleTowerManager?.ChangeTowerSpotBackColor(inTowerSpot, color);
+            }
+            
             
             // 타워 선택 메뉴 숨김
             inGameView?.HideTowerSelectMenu();
@@ -260,13 +273,15 @@ namespace LuckyDefense
         /// </summary>
         /// <param name="inStartPos"></param>
         /// <param name="inEndPos"></param>
-        public void ShowTowerGroupLineRenderer(Vector3 inStartPos, Vector3 inEndPos)
+        public void ShowTowerGroupLineRenderer(Vector3 inStartPos, Vector3 inEndPos, Color inColor)
         {
             selectTowerGroupLineRenderer.enabled = true;
             selectTowerGroupLineRenderer.positionCount = 2;
+            selectTowerGroupLineRenderer.startColor = inColor;
+            selectTowerGroupLineRenderer.endColor = inColor;
             selectTowerGroupLineRenderer.SetPosition(0, inStartPos);
             selectTowerGroupLineRenderer.SetPosition(1, inEndPos);
-            battleTowerManager?.ChangeAllTowerSpotWhiteBack();
+            battleTowerManager?.ChangeAllTowerSpotBackColor(new Color(0, 0, 0, 0));
         }
         
         /// <summary>
@@ -276,7 +291,7 @@ namespace LuckyDefense
         {
             selectTowerGroupLineRenderer.enabled = false;
             selectTowerGroupLineRenderer.positionCount = 0;
-            battleTowerManager?.ChangeAllTowerSpotWhiteBack();
+            battleTowerManager?.ChangeAllTowerSpotBackColor(new Color(0, 0, 0, 0));
         }
         
         public void OnMouseDown()
@@ -289,6 +304,7 @@ namespace LuckyDefense
             if (_selectTowerGroup != null)
             {
                 DeselectTower();
+                return;
             }
             
             // 터치한 위치에 타워 그룹이 있는지 확인
@@ -352,19 +368,28 @@ namespace LuckyDefense
                 }
                 else if (touchTowerSpot != _selectTowerSpot)
                 {
-                    // 이전에 선택 된 타워 그룹이 있던 spot에서 타워 그룹을 제거 한다.
-                    _selectTowerSpot.DetachTowerGroup();
-                    // 새로운 타워 스팟에 타워 그룹을 붙인다
-                    touchTowerSpot.AttachTowerGroup(_selectTowerGroup, false);
-                
-                    // 타워 이동
-                    _selectTowerGroup.AttachMove((inTowerGroup) =>
+                    // 이동할 타워 스팟에 타워가 있는지 판단
+                    if (touchTowerSpot.IsEmptySpot() == false)
                     {
                         DeselectTower();
-                    });
+                    }
+                    else
+                    {
+                        // 이전에 선택 된 타워 그룹이 있던 spot에서 타워 그룹을 제거 한다.
+                        _selectTowerSpot.DetachTowerGroup();
+                        // 새로운 타워 스팟에 타워 그룹을 붙인다
+                        touchTowerSpot.AttachTowerGroup(_selectTowerGroup, false);
+                
+                        // 타워 이동
+                        _selectTowerGroup.AttachMove((inTowerGroup) =>
+                        {
+                            DeselectTower();
+                        });
                     
-                    HideTowerGroupLineRenderer();
-                    Debug.Log(touchTowerSpot.name + " 선택됨");
+                        HideTowerGroupLineRenderer();
+                        Debug.Log(touchTowerSpot.name + " 선택됨");
+                    }
+                    
                 }
             }
         }
