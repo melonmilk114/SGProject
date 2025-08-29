@@ -167,25 +167,16 @@ namespace LuckyDefense
             return true;
         }
         
-        public void ChangeAllTowerSpotWhiteBack()
+        public void ChangeAllTowerSpotBackColor(Color inColor)
         {
-            _towerSpots.ForEach(inItem => inItem.view.ShowWhiteBack());
+            _towerSpots.ForEach(inItem => inItem.view.ChangeBackColor(inColor));
         }
-        public void ChangeTowerSpotWhiteBack(TowerSpotObject inTowerSpot)
+        public void ChangeTowerSpotBackColor(TowerSpotObject inTowerSpot, Color inColor)
         {
             _towerSpots.ForEach(inItem =>
             {
                 if(inItem == inTowerSpot)
-                    inItem.view.ShowWhiteBack();
-            });
-        }
-        
-        public void ChangeTowerSpotRedBack(TowerSpotObject inTowerSpot)
-        {
-            _towerSpots.ForEach(inItem =>
-            {
-                if(inItem == inTowerSpot)
-                    inItem.view.ShowRedBack();
+                    inItem.view.ChangeBackColor(inColor);
             });
         }
         
