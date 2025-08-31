@@ -148,5 +148,16 @@ namespace Melon
                 UnityEngine.Object.Destroy(component);
             }
         }
+        
+        public static T EnumParse<T>(this string value, T defaultValue = default) where T : struct, Enum
+        {
+            if (string.IsNullOrEmpty(value))
+                return defaultValue;
+
+            if (Enum.TryParse<T>(value, true, out var result))
+                return result;
+
+            return defaultValue;
+        }
     }
 }
