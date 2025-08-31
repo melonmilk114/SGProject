@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Melon
 {
-    public class CommonUtils
+    public static class CommonUtils
     {
         // MEMO : Get함수는 보통 데이터가 반드시 존재한다고 가정하고 동작
         // MEMO : Find함수는 데이터가 없을 수도 있으므로 예외를 던지지 않고 null이나 default 값을 반환하는 경우가 많음
@@ -140,8 +140,7 @@ namespace Melon
 
             return newHandler;
         }
-
-        public static void AllRemoveComponent<T>(GameObject inObj) where T : Component
+        public static void AllRemoveComponent<T>(this GameElement inObj) where T : Component
         {
             var components = inObj.GetComponents<T>();
             foreach (var component in components)
@@ -149,6 +148,5 @@ namespace Melon
                 UnityEngine.Object.Destroy(component);
             }
         }
-        
     }
 }
