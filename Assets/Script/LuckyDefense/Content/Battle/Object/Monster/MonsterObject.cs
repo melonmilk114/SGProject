@@ -22,7 +22,8 @@ namespace LuckyDefense
         
         public void OnPoolDequeue()
         {
-            CommonUtils.AllRemoveComponent<MonsterHandler>(gameObject);
+            this.AllRemoveComponent<MonsterHandler>();
+            
             state.Reset();
             
             targetMonsterMissiles.ForEach(inItem => inItem.isDestroyReady = true);
