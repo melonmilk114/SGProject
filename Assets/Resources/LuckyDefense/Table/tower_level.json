@@ -1,0 +1,34 @@
+[
+    {
+        "sn": 1,
+        "group_sn": 1,
+        "level": 3,
+        "stat_type": "ATTACK",
+        "stat_modifier_type": "ADDITIVE",
+        "stat_modifier_value": 10
+    },
+    {
+        "sn": 2,
+        "group_sn": 1,
+        "level": 9,
+        "stat_type": "ATTACK_SPEED",
+        "stat_modifier_type": "ADDITIVE",
+        "stat_modifier_value": 10
+    },
+    {
+        "sn": 3,
+        "group_sn": 1,
+        "level": 15,
+        "stat_type": "ATTACK",
+        "stat_modifier_type": "ADDITIVE",
+        "stat_modifier_value": 10
+    },
+    {
+        "sn": 4,
+        "group_sn": 1,
+        "level": 15,
+        "stat_type": "ATTACK_SPEED",
+        "stat_modifier_type": "ADDITIVE",
+        "stat_modifier_value": 10
+    }
+]
