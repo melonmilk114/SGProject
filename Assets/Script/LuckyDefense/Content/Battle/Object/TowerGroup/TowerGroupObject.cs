@@ -56,7 +56,7 @@ namespace LuckyDefense
             return towerList.Count;
         }
 
-        public void CreateAttachTower(TowerTableDataItem inData)
+        public void CreateAttachTower(TowerTableDataItem inData, long inTowerLevel, List<TowerLevelTableDataItem> inLevelDataList)
         {
             var gameElement = ResourcesManager.Instance.LoadGameElement("LuckyDefense/Prefab/Tower/TowerObject");
 
@@ -67,7 +67,7 @@ namespace LuckyDefense
                 var newPrefab = Instantiate(gameElement.gameObject, transform);
                 newPrefab.transform.SetAsFirstSibling();
                 var comp = newPrefab.GetComponent<TowerObject>();
-                comp.SetData(inData);
+                comp.SetData(inData, inTowerLevel, inLevelDataList);
                 AttachTower(comp);
             }
             else

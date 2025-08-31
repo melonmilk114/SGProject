@@ -18,6 +18,7 @@ namespace LuckyDefense
         public GameObject towerSpotsParent;
         
         public TowerTableData towerTableData;
+        public TowerLevelTableData towerLevelTableData;
         
         #region ITargetObjectReceiver<TableDataManager>
         TableDataManager ITargetObjectReceiver<TableDataManager>.GetTargetObject { get; set; }
@@ -88,6 +89,7 @@ namespace LuckyDefense
             GetTableDataManager(inMgr =>
             {
                 towerTableData = inMgr.towerTableData;
+                towerLevelTableData = inMgr.towerLevelTableData;
             });
         }
 
@@ -138,13 +140,21 @@ namespace LuckyDefense
             return towerGroupObject;
         }
         
-        public bool CreateTower(long inCreateTowerSn)
+        public bool CreateTower(long inCreateTowerSn, long inTowerLevel)
         {
             // 타워 생성 데이터 가져 오기
             var tmpTowerData = towerTableData.FindTowerData(inCreateTowerSn);
             if (tmpTowerData == null)
             {
                 Debug.LogError($"{this} 타워 데이터가 null 입니다.");
+                return false;
+            }
+            
+            // 타워 레벨 데이터 가져 오기
+            var tmpTowerLevelDataList = towerLevelTableData.FindLevelDataListByGroupSn(tmpTowerData.level_group_sn);
+            if (tmpTowerLevelDataList == null)
+            {
+                DebugLogHelper.LogError($"타워 레벨 데이터가 null 입니다.{inCreateTowerSn}");
                 return false;
             }
             
@@ -174,7 +184,7 @@ namespace LuckyDefense
                 _towerGroups.Add(towerGroup);
             }
 
-            tmpTowerSpot.towerGroup.CreateAttachTower(tmpTowerData);
+            tmpTowerSpot.towerGroup.CreateAttachTower(tmpTowerData, inTowerLevel, tmpTowerLevelDataList);
 
             return true;
         }

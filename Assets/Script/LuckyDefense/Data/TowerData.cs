@@ -32,6 +32,14 @@ namespace LuckyDefense
         {
             
         }
+        
+        public long GetTowerLevel(long inTowerSn)
+        {
+            var find = dataList.Find(inFindItem => inFindItem.tower_sn == inTowerSn);
+            if(find != null)
+                return find.level;
+            return 0;
+        }
     }
 #if UNITY_EDITOR
     [System.Serializable]

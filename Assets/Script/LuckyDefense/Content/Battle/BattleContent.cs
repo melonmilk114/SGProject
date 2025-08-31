@@ -139,7 +139,7 @@ namespace LuckyDefense
                 lunchTowerList.ForEach(inTower =>
                 {
                     var missileData = battleService.GetTowerMissileData(inTower.tableData?.sn);
-                    var missileDamage = battleService.GetTowerMissileDamage(inTower.tableData?.sn);
+                    var missileDamage = battleService.GetTowerMissileDamage(inTower);
                     battleMissileManager?.CreateMissile(inTower, monster, missileData, missileDamage);
                 });
             });
@@ -196,9 +196,9 @@ namespace LuckyDefense
         /// 타워 생성
         /// </summary>
         /// <param name="inTowerSn">생성할 타워 SN</param>
-        private void CreateTower(long inTowerSn)
+        private bool CreateTower(long inTowerSn)
         {
-            battleTowerManager?.CreateTower(inTowerSn);
+            return battleTowerManager.CreateTower(inTowerSn, battleService.GetTowerLevel(inTowerSn));
         }
  
         // 타워 선택 관련 
@@ -505,7 +505,7 @@ namespace LuckyDefense
                 return;
             }
 
-            bool created = battleTowerManager.CreateTower(createSn);
+            bool created = CreateTower(createSn);
             if(created)
                 battleService.PayTowerSummonCost();
             

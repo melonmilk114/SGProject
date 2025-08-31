@@ -159,18 +159,16 @@ namespace LuckyDefense
 
             return missileData;
         }
-        public long GetTowerMissileDamage(long? inTowerSn)
+        public long GetTowerMissileDamage(TowerObject inTower)
         {
-            var findTowerData = towerTableData.FindTowerData(inTowerSn);
-            if (findTowerData == null)
-            {
-                DebugLogHelper.LogError($"findTowerData is null {inTowerSn}");
-                return 0;
-            }
-            
-            var damage = Mathf.Round(findTowerData.attack);
+            var damage = Mathf.Round(inTower.stat.GetStat(STAT_TYPE.ATTACK));
             
             return (long)damage;
+        }
+        
+        public long GetTowerLevel(long inTowerSn)
+        {
+            return towerData.GetTowerLevel(inTowerSn);
         }
     }
 }

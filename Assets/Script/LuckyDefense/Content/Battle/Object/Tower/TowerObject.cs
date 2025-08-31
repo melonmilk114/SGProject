@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Melon;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -8,14 +9,19 @@ namespace LuckyDefense
     public class TowerObject : GameElement
     {
         public TowerView view;
+        public StatObject stat;
         public TowerTableDataItem tableData = null;
         
+        public long towerLevel = 1;
         public float nextMissileLaunchTime = float.MaxValue;
         
-        public void SetData(TowerTableDataItem inData)
+        public void SetData(TowerTableDataItem inData, long inTowerLevel, List<TowerLevelTableDataItem> inLevelDataList)
         {
             tableData = inData;
+            towerLevel = inTowerLevel;
             nextMissileLaunchTime = Time.time + tableData.attack_speed;
+            
+            stat.InitStatObject(this, towerLevel, inData, inLevelDataList);
             
             view.Init(tableData);
         }
@@ -55,6 +61,16 @@ namespace LuckyDefense
             {
                 view.PlayAnimation(dir.y > 0 ? Vector2.up : Vector2.down);
             }
+        }
+        
+        [ContextMenu("Stat Calculate")]
+        public void StatCalculate()
+        {
+            stat.CalculateStats(towerLevel);
+            Debug.LogError($"[TowerObject] StatCalculate {tableData.sn} : " +
+                           $"ATTACK={stat.GetStat(STAT_TYPE.ATTACK)}, " +
+                           $"ATTACK_SPEED={stat.GetStat(STAT_TYPE.ATTACK_SPEED)}, " +
+                           $"CRITICAL_RATE={stat.GetStat(STAT_TYPE.CRITICAL_RATE)}");
         }
     }
 }

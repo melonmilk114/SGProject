@@ -5,6 +5,7 @@ namespace LuckyDefense
     public class TableDataManager : Melon.TableDataManager
     {
         public TowerTableData towerTableData = new TowerTableData();
+        public TowerLevelTableData towerLevelTableData = new TowerLevelTableData();
         public MissileTableData missileTableData = new MissileTableData();
         public MonsterTableData monsterTableData = new MonsterTableData();
         public TowerSpotData towerSpotData = new TowerSpotData();
@@ -23,6 +24,7 @@ namespace LuckyDefense
             base.InitData();
             
             towerTableData.InitData();
+            towerLevelTableData.InitData();
             missileTableData.InitData();
             monsterTableData.InitData();
             towerSpotData.InitData();
@@ -35,6 +37,7 @@ namespace LuckyDefense
             base.ResetData();
             
             towerTableData.ResetData();
+            towerLevelTableData.ResetData();
             missileTableData.ResetData();
             monsterTableData.ResetData();
             towerSpotData.ResetData();
