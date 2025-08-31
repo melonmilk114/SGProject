@@ -139,7 +139,7 @@ namespace LuckyDefense
                 lunchTowerList.ForEach(inTower =>
                 {
                     var missileData = battleService.GetTowerMissileData(inTower.tableData?.sn);
-                    var missileDamage = battleService.GetTowerMissileDamage(inTower.tableData?.sn, missileData);
+                    var missileDamage = battleService.GetTowerMissileDamage(inTower.tableData?.sn);
                     battleMissileManager?.CreateMissile(inTower, monster, missileData, missileDamage);
                 });
             });

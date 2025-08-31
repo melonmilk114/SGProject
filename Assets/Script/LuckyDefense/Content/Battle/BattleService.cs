@@ -159,7 +159,7 @@ namespace LuckyDefense
 
             return missileData;
         }
-        public long GetTowerMissileDamage(long? inTowerSn, MissileTableDataItem inMissileData)
+        public long GetTowerMissileDamage(long? inTowerSn)
         {
             var findTowerData = towerTableData.FindTowerData(inTowerSn);
             if (findTowerData == null)
@@ -168,7 +168,7 @@ namespace LuckyDefense
                 return 0;
             }
             
-            var damage = Mathf.Round(inMissileData.damage);
+            var damage = Mathf.Round(findTowerData.attack);
             
             return (long)damage;
         }

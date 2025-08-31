@@ -102,9 +102,15 @@ namespace LuckyDefense
         public int grade = 0;
         public long remove_reward = 0;
         public long missile_sn = 0;
-        public float missile_interval = 0.01f;
         public float attack_range = 3.0f;
         public int summon_weight = 0;
         public string animator = "";
+        
+        public long level_group_sn = 0; // 타워 레벨 그룹
+        
+        // 타워 스탯 (데이터화가 필요해 보임)
+        public float attack;
+        public float attack_speed;
+        public float critical_rate;
     }
 }

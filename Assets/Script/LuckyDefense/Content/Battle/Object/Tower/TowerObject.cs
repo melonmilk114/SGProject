@@ -15,7 +15,7 @@ namespace LuckyDefense
         public void SetData(TowerTableDataItem inData)
         {
             tableData = inData;
-            nextMissileLaunchTime = Time.time + tableData.missile_interval;
+            nextMissileLaunchTime = Time.time + tableData.attack_speed;
             
             view.Init(tableData);
         }
@@ -27,7 +27,7 @@ namespace LuckyDefense
 
         public void DoMissileLaunch(MonsterObject inMonster)
         {
-            nextMissileLaunchTime = Time.time + tableData.missile_interval;
+            nextMissileLaunchTime = Time.time + tableData.attack_speed;
             
             Vector2 dir = (inMonster.transform.position - transform.position).normalized;
 

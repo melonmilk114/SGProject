@@ -55,7 +55,6 @@ namespace LuckyDefense
     {
         public long sn = 0;
         public float speed = 5f;
-        public float damage = 1f;
         public string sprite = "";
         public string destroyHandlerType = "LuckyDefense.MissileDestroyHandler";
         public string moveHandlerType = "LuckyDefense.MissileMoveHandler";
